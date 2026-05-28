@@ -1,73 +1,76 @@
-# React + TypeScript + Vite
+# Flowify Landing Page — Systems Operations & Engineering Cockpit
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the official repository for the **Flowify Landing Page**. This is a premium, production-grade React + TypeScript web application engineered with a clean, high-contrast **Utilitarian Engineering & Modern Editorial** aesthetic.
 
-Currently, two official plugins are available:
+Instead of traditional, generic "AI slop" templates, this landing page is styled exclusively with raw pixel-perfect vanilla CSS grid layouts, humanist typography stacks, and interactive physical simulation widgets to build high trust with clients.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 🛠️ Operational Engines & Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 1. Interactive Operations Cockpit (`Cockpit.tsx`)
+* An interactive systems blueprint visualizer displaying flow convergence pipelines.
+* Supports **Friction vs. Flow** state toggling, manual lead injection, and system reboots.
+* Animates flowing network data packet nodes that bottleneck and turn red under Friction mode but transition into glowing, high-velocity green streams in Flow mode.
 
-## Expanding the ESLint configuration
+### 2. Silent Operations Drain Calculator (`Calculator.tsx`)
+* An interactive financial ledger audit calculator customized for local business bottlenecks (manual Justdial lists, siloed POS systems, delayed GST invoicing, etc.).
+* Computes real-time weekly wasted hours, monthly staff labor overhead in INR (₹), lost lead revenue, and administrative drain.
+* Drives a custom radial SVG gauge indicating the operational friction score with smooth dash-offset interpolation.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. Services strip Accordion Stack (`Services.tsx`)
+* A full-width vertical strip accordion stack displaying our core operational engines.
+* Highlights individual strips with their system theme accent colors (Amber, Mint, Red, Blue).
+* Prioritizes high-converting **Growth Marketing** (Instagram & Meta ad campaigns, programmatic SEO, Google Maps local profile optimization) and **Automated Social Syndication Engines** first.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 4. Segment-Colored Timeline Pipeline (`Process.tsx`)
+* A horizontally spanning SVG track tracking our deployment phases: **Audit**, **Build**, and **Launch**.
+* Resolves standard browser rendering limitations on zero-height lines by using a responsive coordinate space (`viewBox="0 0 1200 8"`) and `userSpaceOnUse` gradient mapping.
+* Features a single pulsing laser indicator that dynamically shifts color (from neutral white to Yellow/Amber, Green, and Royal Blue) as it crosses through the phase boundaries.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 5. Interaction-Aware Video Testimonials (`VideoReviews.tsx`)
+* Scroll-triggered autoplay mechanics for customer reviews.
+* Intelligently plays video testimonials unmuted as soon as they scroll into viewport, provided the user has made an initial interaction on the page. Otherwise, presents tactile play overlays to bypass native browser audio policies seamlessly.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 🏗️ Technology Stack
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+* **Core**: React 19, TypeScript
+* **Build System**: Vite (utilizing lightning-fast HMR)
+* **Styling**: Modern Vanilla CSS variables, layout grid tokens, and typographic scale pairings (Plus Jakarta Sans & Instrument Serif)
+* **Icons**: Lucide React
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 🚀 Getting Started
+
+### Local Development
+
+1. **Install Dependencies**:
+   ```bash
+   npm install
+   ```
+
+2. **Launch Dev Server**:
+   ```bash
+   npm run dev
+   ```
+   Open `http://localhost:5173` in your browser.
+
+### Production Build
+
+1. **Type-Check and Compile Bundle**:
+   ```bash
+   npm run build
+   ```
+   Generates a highly optimized, light-weight client bundle in the `dist` directory.
+
+2. **Preview Production Build**:
+   ```bash
+   npm run preview
+   ```
+
+---
+
+*Engineered with 🖤 by the Flowify Systems Team.*
