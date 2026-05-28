@@ -20,11 +20,6 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
         <div className="grid-layout">
           {/* Hero Left: Editorial Heading Copy */}
           <div className="fade-in-staged" style={{ animationDelay: '0.1s' }}>
-            <div style={{ marginBottom: 'var(--space-3)' }}>
-              <span className="badge-mono" style={{ borderColor: 'var(--color-accent)', color: 'var(--color-accent)' }}>
-                SYSTEM STATE: ACTIVE // INDIAN OPERATIONAL CORE
-              </span>
-            </div>
             
             <h1 
               style={{
