@@ -70,7 +70,3 @@ Instead of traditional, generic "AI slop" templates, this landing page is styled
    ```bash
    npm run preview
    ```
-
----
-
-*Engineered with 🖤 by the Flowify Systems Team.*
