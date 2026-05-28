@@ -1,0 +1,434 @@
+@import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital,wght@0,400;1,400&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap');
+
+/* ==========================================
+   1. DESIGN SYSTEM VARIABLES & THEMES
+   ========================================== */
+:root {
+  /* Spacing Multiples (Strict 8px Grid) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 48px;
+  --space-7: 64px;
+  --space-8: 96px;
+
+  /* Typography Scales */
+  --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-heading-mono: 'IBM Plex Mono', monospace;
+  --font-heading-serif: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+
+  --line-height-body: 1.625;
+  --line-height-heading: 1.15;
+
+  --font-size-hero: clamp(2.4rem, 1.2rem + 6vw, 4.8rem);
+  --font-size-h2: clamp(1.8rem, 1.2rem + 3.2vw, 3.2rem);
+  --font-size-h3: clamp(1.3rem, 1.1rem + 1.2vw, 1.8rem);
+  --font-size-body: clamp(0.95rem, 0.9rem + 0.25vw, 1.05rem);
+  --font-size-sm: 0.875rem;
+  --font-size-xs: 0.75rem;
+
+  /* Global Radius & Motion Specs */
+  --radius-sm: 0px; /* Monolithic sharp corners for utilitarian brutalist style */
+  --radius-md: 4px;
+  --radius-lg: 8px;
+
+  --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Calibrated Dark Theme (Obsidian Engineering) */
+  --color-bg: #070709;
+  --color-surface: #0E0E12;
+  --color-surface-subtle: #14141A;
+  
+  --color-border: #1E1E24;
+  --color-border-hover: #2E2E38;
+  --color-border-high: #3A3A46;
+  
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #9B9BA6;
+  --color-text-muted: #5C5C66;
+  
+  --color-accent: #10B981; /* Mint Emerald Accent */
+  --color-accent-hover: #059669;
+  --color-accent-muted: rgba(16, 185, 129, 0.1);
+  
+  --color-warning: #F59E0B; /* Amber Alert */
+  --color-danger: #EF4444;  /* Crimson Fault */
+  
+  /* Theme-calibrated packet colors for Cockpit diagram flow */
+  --color-packet-ingest: #F59E0B;
+  --color-packet-booking: #10B981;
+  --color-packet-invoice: #64D2FF;
+  --color-packet-promo: #0A84FF;
+  --color-packet-warn: #EF4444;
+
+  --canvas-grid: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+  --canvas-grid-size: 24px 24px;
+  
+  color-scheme: dark;
+}
+
+/* Light Theme (Precision Editorial) */
+:root.light {
+  --color-bg: #F8F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #F1F1F5;
+  
+  --color-border: #E1E1E8;
+  --color-border-hover: #D1D1D8;
+  --color-border-high: #B5B5C0;
+  
+  --color-text-primary: #121215;
+  --color-text-secondary: #4E4E59;
+  --color-text-muted: #8A8A96;
+  
+  --color-accent: #059669; /* Darker green for light-mode visibility */
+  --color-accent-hover: #047857;
+  --color-accent-muted: rgba(5, 150, 105, 0.08);
+
+  --color-warning: #D97706;
+  --color-danger: #DC2626;
+
+  /* Calibrated for white background to satisfy WCAG AA (>4.5:1 ratio) */
+  --color-packet-ingest: #D97706;
+  --color-packet-booking: #059669;
+  --color-packet-invoice: #0284C7;
+  --color-packet-promo: #1D4ED8;
+  --color-packet-warn: #DC2626;
+
+  --canvas-grid: radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  
+  color-scheme: light;
+}
+
+/* ==========================================
+   2. SYSTEM RESET & BASICS
+   ========================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  font-size: var(--font-size-body);
+  line-height: var(--line-height-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 800;
+  line-height: var(--line-height-heading);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+}
+
+.editorial-serif {
+  font-family: var(--font-heading-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+p {
+  color: var(--color-text-secondary);
+  text-wrap: pretty;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* Focus Rings */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+/* Custom Scrollbars */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border-high) var(--color-bg);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-high);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-secondary);
+}
+
+/* ==========================================
+   3. SPATIAL LAYOUT RULES & MATH
+   ========================================== */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--space-4);
+  padding-right: var(--space-4);
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: var(--space-6);
+    padding-right: var(--space-6);
+  }
+}
+
+.grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .grid-layout {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-8);
+  }
+}
+
+section {
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-8);
+  position: relative;
+  border-bottom: none;
+  background-image: var(--canvas-grid);
+  background-size: var(--canvas-grid-size);
+}
+
+section::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90%, 1200px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-border-high) 20%, var(--color-accent) 50%, var(--color-border-high) 80%, transparent);
+  opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+  section {
+    padding-top: calc(var(--space-8) * 1.5);
+    padding-bottom: calc(var(--space-8) * 1.5);
+  }
+}
+
+/* Section Heading Accent */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-heading-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  position: relative;
+  padding-left: 20px;
+}
+
+.section-tag::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 1px;
+  background-color: var(--color-accent);
+}
+
+/* ==========================================
+   4. CORE COMPONENT STYLES
+   ========================================== */
+
+/* Premium Utilitarian Cards */
+.card-premium {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-5);
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--transition-normal), background-color var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+@media (min-width: 768px) {
+  .card-premium {
+    padding: var(--space-6);
+  }
+}
+
+.card-premium:hover {
+  border-color: var(--color-border-high);
+  background-color: var(--color-surface-subtle);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Sharp Accent Monospace Badges */
+.badge-mono {
+  display: inline-block;
+  font-family: var(--font-heading-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+  border: 1px solid var(--color-border);
+  padding: var(--space-1) var(--space-2);
+  background-color: var(--color-bg);
+  text-transform: uppercase;
+}
+
+/* Dynamic Buttons */
+.btn-core {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3) var(--space-5);
+  font-family: var(--font-heading);
+  font-size: var(--font-size-sm);
+  font-weight: 800;
+  border-radius: var(--radius-sm);
+  transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.btn-primary-action {
+  background-color: var(--color-accent);
+  color: #070709; /* Deep obsidian contrast */
+  border: 1px solid var(--color-accent);
+}
+
+.btn-primary-action:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+
+.btn-secondary-action {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.btn-secondary-action:hover {
+  border-color: var(--color-text-primary);
+  background-color: var(--color-surface-subtle);
+}
+
+.btn-pixel-brutal {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border: 2px solid var(--color-text-primary);
+  box-shadow: 4px 4px 0px var(--color-text-primary);
+  margin-right: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+.btn-pixel-brutal:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px var(--color-text-primary);
+}
+
+.btn-pixel-brutal:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0px 0px 0px var(--color-text-primary);
+}
+
+.btn-sm-action {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--font-size-xs);
+}
+
+/* Blueprint Blueprint Grid Canvas */
+.canvas-blueprint {
+  aspect-ratio: 4 / 3;
+  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.canvas-blueprint::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--canvas-grid);
+  background-size: 16px 16px;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+/* ==========================================
+   5. UTILITY STAGED ENTRANCES
+   ========================================== */
+.fade-in-staged {
+  opacity: 0;
+  transform: translateY(16px);
+  animation: stagedFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes stagedFadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scroll-Triggered Entrance System */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
