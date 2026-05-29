@@ -14,7 +14,7 @@
   --space-7: 64px;
   --space-8: 96px;
 
-  /* Typography Scales */
+  /* Typography Scales (DO NOT CHANGE FONTS) */
   --font-heading: 'Plus Jakarta Sans', -apple-system, sans-serif;
   --font-heading-mono: 'IBM Plex Mono', monospace;
   --font-heading-serif: 'Instrument Serif', Georgia, serif;
@@ -39,7 +39,47 @@
   --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-  /* Calibrated Dark Theme (Obsidian Engineering) */
+  /* Light Theme (Precision Editorial) */
+  --color-bg: #F8F8FA;
+  --color-surface: #FFFFFF;
+  --color-surface-subtle: #ECECEF;
+  
+  --color-border: #CECED6;
+  --color-border-hover: #A3A3B0;
+  --color-border-high: #7A7A8A;
+  
+  --color-text-primary: #121215;
+  --color-text-secondary: #4E4E59;
+  --color-text-muted: #6E6E7A;
+  
+  --color-accent: #059669; /* Darker green for light-mode visibility */
+  --color-accent-hover: #047857;
+  --color-accent-muted: rgba(5, 150, 105, 0.08);
+
+  --color-warning: #D97706;
+  --color-danger: #DC2626;
+
+  /* Calibrated for white background to satisfy WCAG AA (>4.5:1 ratio) */
+  --color-packet-ingest: #D97706;
+  --color-packet-booking: #059669;
+  --color-packet-invoice: #0284C7;
+  --color-packet-promo: #1D4ED8;
+  --color-packet-warn: #DC2626;
+
+  --canvas-grid: radial-gradient(circle, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+  --canvas-grid-size: 24px 24px;
+
+  /* Premium Multi-layered Shadows (Slightly more deliberate for distinct contrast) */
+  --shadow-sm: 0 2px 4px 0 rgba(18, 18, 21, 0.03);
+  --shadow-md: 0 6px 16px -2px rgba(18, 18, 21, 0.06), 0 2px 6px -1px rgba(18, 18, 21, 0.03);
+  --shadow-lg: 0 16px 32px -4px rgba(18, 18, 21, 0.08), 0 4px 12px -2px rgba(18, 18, 21, 0.04);
+  --shadow-premium: 0 28px 48px -12px rgba(18, 18, 21, 0.1), 0 0 0 1px rgba(18, 18, 21, 0.02);
+  
+  color-scheme: light;
+}
+
+/* Dark Theme (Obsidian Engineering) */
+:root.dark {
   --color-bg: #070709;
   --color-surface: #0E0E12;
   --color-surface-subtle: #14141A;
@@ -67,42 +107,14 @@
   --color-packet-warn: #EF4444;
 
   --canvas-grid: radial-gradient(circle, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  --canvas-grid-size: 24px 24px;
   
+  /* Dark mode heavy structural shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 12px 24px -4px rgba(0, 0, 0, 0.5), 0 4px 12px -2px rgba(0, 0, 0, 0.3);
+  --shadow-premium: 0 20px 40px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.02);
+
   color-scheme: dark;
-}
-
-/* Light Theme (Precision Editorial) */
-:root.light {
-  --color-bg: #F8F8FA;
-  --color-surface: #FFFFFF;
-  --color-surface-subtle: #F1F1F5;
-  
-  --color-border: #E1E1E8;
-  --color-border-hover: #D1D1D8;
-  --color-border-high: #B5B5C0;
-  
-  --color-text-primary: #121215;
-  --color-text-secondary: #4E4E59;
-  --color-text-muted: #8A8A96;
-  
-  --color-accent: #059669; /* Darker green for light-mode visibility */
-  --color-accent-hover: #047857;
-  --color-accent-muted: rgba(5, 150, 105, 0.08);
-
-  --color-warning: #D97706;
-  --color-danger: #DC2626;
-
-  /* Calibrated for white background to satisfy WCAG AA (>4.5:1 ratio) */
-  --color-packet-ingest: #D97706;
-  --color-packet-booking: #059669;
-  --color-packet-invoice: #0284C7;
-  --color-packet-promo: #1D4ED8;
-  --color-packet-warn: #DC2626;
-
-  --canvas-grid: radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
-  
-  color-scheme: light;
 }
 
 /* ==========================================
@@ -289,6 +301,7 @@ section::after {
   padding: var(--space-5);
   position: relative;
   overflow: hidden;
+  box-shadow: var(--shadow-sm);
   transition: border-color var(--transition-normal), background-color var(--transition-normal), transform var(--transition-normal), box-shadow var(--transition-normal);
 }
 
@@ -302,7 +315,7 @@ section::after {
   border-color: var(--color-border-high);
   background-color: var(--color-surface-subtle);
   transform: translateY(-2px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-lg);
 }
 
 /* Sharp Accent Monospace Badges */
@@ -346,14 +359,16 @@ section::after {
 }
 
 .btn-secondary-action {
-  background-color: transparent;
+  background-color: var(--color-surface);
   color: var(--color-text-primary);
-  border: 1px solid var(--color-border);
+  border: 1.5px solid var(--color-border-high);
+  box-shadow: var(--shadow-sm);
 }
 
 .btn-secondary-action:hover {
   border-color: var(--color-text-primary);
   background-color: var(--color-surface-subtle);
+  box-shadow: var(--shadow-md);
 }
 
 .btn-pixel-brutal {

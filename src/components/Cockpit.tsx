@@ -193,7 +193,7 @@ export const Cockpit: React.FC = () => {
       <svg className="cockpit-pipelines" viewBox="0 0 400 300" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', zIndex: 1 }}>
         <path 
           d="M 88 84 L 200 150" 
-          stroke={isFlow ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)'}
+          stroke={isFlow ? 'color-mix(in srgb, var(--color-accent) 35%, transparent)' : 'color-mix(in srgb, var(--color-packet-warn) 30%, transparent)'}
           strokeWidth={isFlow ? 1.5 : 1}
           fill="none"
           strokeLinecap="round"
@@ -201,7 +201,7 @@ export const Cockpit: React.FC = () => {
         />
         <path 
           d="M 312 84 L 200 150" 
-          stroke={isFlow ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)'}
+          stroke={isFlow ? 'color-mix(in srgb, var(--color-accent) 35%, transparent)' : 'color-mix(in srgb, var(--color-packet-warn) 30%, transparent)'}
           strokeWidth={isFlow ? 1.5 : 1}
           fill="none"
           strokeLinecap="round"
@@ -209,7 +209,7 @@ export const Cockpit: React.FC = () => {
         />
         <path 
           d="M 312 216 L 200 150" 
-          stroke={isFlow ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)'}
+          stroke={isFlow ? 'color-mix(in srgb, var(--color-accent) 35%, transparent)' : 'color-mix(in srgb, var(--color-packet-warn) 30%, transparent)'}
           strokeWidth={isFlow ? 1.5 : 1}
           fill="none"
           strokeLinecap="round"
@@ -217,7 +217,7 @@ export const Cockpit: React.FC = () => {
         />
         <path 
           d="M 88 216 L 200 150" 
-          stroke={isFlow ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)'}
+          stroke={isFlow ? 'color-mix(in srgb, var(--color-accent) 35%, transparent)' : 'color-mix(in srgb, var(--color-packet-warn) 30%, transparent)'}
           strokeWidth={isFlow ? 1.5 : 1}
           fill="none"
           strokeLinecap="round"
@@ -227,6 +227,7 @@ export const Cockpit: React.FC = () => {
 
       {/* Cockpit Header State Controls */}
       <div 
+        className="cockpit-header"
         style={{
           position: 'absolute',
           top: '12px',
@@ -239,6 +240,7 @@ export const Cockpit: React.FC = () => {
         }}
       >
         <span 
+          className="cockpit-status-badge"
           style={{
             fontFamily: 'var(--font-heading-mono)',
             fontSize: '0.6rem',
@@ -257,6 +259,7 @@ export const Cockpit: React.FC = () => {
 
         {/* Friction / Flow slider Switch */}
         <div 
+          className="cockpit-toggle-wrapper"
           style={{
             display: 'flex',
             alignItems: 'center',
@@ -331,6 +334,7 @@ export const Cockpit: React.FC = () => {
           <div 
             key={p.id}
             id={`packet-${p.id}`}
+            className="cockpit-packet"
             style={{
               position: 'absolute',
               left: `${currentX}%`,
@@ -494,14 +498,14 @@ export const Cockpit: React.FC = () => {
         <button 
           onClick={handleInjectLead}
           className="btn-core btn-secondary-action btn-sm-action"
-          style={{ padding: '4px 8px', fontSize: '0.55rem', fontWeight: 700 }}
+          style={{ padding: '4px 8px', fontSize: '0.65rem', fontWeight: 700 }}
         >
           Inject Lead [+]
         </button>
         <button 
           onClick={handleReboot}
           className="btn-core btn-secondary-action btn-sm-action"
-          style={{ padding: '4px 8px', fontSize: '0.55rem', fontWeight: 700 }}
+          style={{ padding: '4px 8px', fontSize: '0.65rem', fontWeight: 700 }}
         >
           Reboot System
         </button>
@@ -514,8 +518,8 @@ export const Cockpit: React.FC = () => {
           bottom: '10px',
           right: '12px',
           fontFamily: 'var(--font-heading-mono)',
-          fontSize: '0.55rem',
-          color: 'var(--color-text-muted)',
+          fontSize: '0.65rem',
+          color: 'var(--color-text-secondary)',
           pointerEvents: 'none'
         }}
       >
@@ -552,8 +556,8 @@ export const Cockpit: React.FC = () => {
         }
         .node-lbl {
           font-family: var(--font-heading);
-          font-size: 0.55rem;
-          font-weight: 700;
+          font-size: 0.68rem;
+          font-weight: 800;
           color: var(--color-text-primary);
           text-align: center;
           line-height: 1.1;
@@ -561,17 +565,18 @@ export const Cockpit: React.FC = () => {
         }
         .node-sub {
           font-family: var(--font-heading-mono);
-          font-size: 0.4rem;
+          font-size: 0.52rem;
           color: var(--color-text-secondary);
           text-align: center;
-          margin-top: 1px;
+          margin-top: 2px;
+          font-weight: 500;
         }
         .badge-micro {
           font-family: var(--font-heading-mono);
-          font-size: 0.4rem;
+          font-size: 0.52rem;
           font-weight: 700;
           letter-spacing: 0.05em;
-          padding: 1px 3px;
+          padding: 1px 4px;
           background-color: var(--color-bg);
           border-radius: 1px;
         }
@@ -592,6 +597,59 @@ export const Cockpit: React.FC = () => {
           transform: translate(-50%, -50%) scale(1.08) !important;
           border-color: var(--color-text-primary) !important;
           box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+        }
+        @media (max-width: 767px) {
+          .blueprint-node {
+            width: 70px !important;
+            padding: 3px !important;
+            min-height: 32px !important;
+          }
+          .central-hub {
+            width: 82px !important;
+            min-height: 42px !important;
+            padding: 4px !important;
+          }
+          .node-lbl {
+            font-size: 0.52rem !important;
+            margin-top: 1px !important;
+          }
+          .node-sub {
+            font-size: 0.38rem !important;
+            margin-top: 1px !important;
+          }
+          .badge-micro {
+            font-size: 0.38rem !important;
+            padding: 0px 2px !important;
+          }
+          .cockpit-dashboard {
+            bottom: 6px !important;
+            left: 6px !important;
+            gap: 4px !important;
+          }
+          .cockpit-dashboard button {
+            padding: 2px 5px !important;
+            font-size: 0.52rem !important;
+          }
+          .cockpit-header {
+            top: 6px !important;
+            left: 6px !important;
+            right: 6px !important;
+          }
+          .cockpit-status-badge {
+            font-size: 0.48rem !important;
+            padding: 2px 4px !important;
+          }
+          .cockpit-toggle-wrapper {
+            padding: 1px 4px !important;
+            gap: 3px !important;
+          }
+          .cockpit-toggle-wrapper span {
+            font-size: 0.48rem !important;
+          }
+          .cockpit-packet {
+            font-size: 0.42rem !important;
+            padding: 1px 3px !important;
+          }
         }
       `}</style>
     </div>

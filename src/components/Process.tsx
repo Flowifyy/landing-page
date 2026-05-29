@@ -12,24 +12,24 @@ interface Phase {
 const phases: Phase[] = [
   {
     num: '01',
-    title: 'Audit',
+    title: 'Operational Audit',
     icon: Search,
-    desc: 'We map every manual handoff, siloed spreadsheet, and copy-paste loop across your daily operations. Every friction point is logged and costed.',
-    deliverables: ['Friction Leak Map', 'API Convergence Blueprint']
+    desc: 'We sit down with your team to map every single manual sheet, copy-paste loop, and double-entry headache in your daily operations. We point out exactly where your business is losing time and money.',
+    deliverables: ['Operational Pain-Point Map', 'Custom Automation Roadmap']
   },
   {
     num: '02',
-    title: 'Build',
+    title: 'Custom Setup',
     icon: PenTool,
-    desc: 'We code custom webhook bridges, admin portals, and self-healing API relays. Your Tally, Zoho, WhatsApp, and Razorpay systems get wired together.',
-    deliverables: ['Custom Admin Dashboard', 'Beta API Pipeline']
+    desc: 'We construct the connections between your Tally, WhatsApp, CRM, and payment systems. We build clean, easy-to-use dashboards so your staff doesn\'t have to jump between 10 different systems.',
+    deliverables: ['Custom Business Dashboard', 'Live Beta Testing']
   },
   {
     num: '03',
-    title: 'Launch',
+    title: 'Handover & Support',
     icon: Radio,
-    desc: 'Production deployment with staff training, 24/7 telemetry logs, and automatic fail-safes. Your team gains back 20+ hours per week permanently.',
-    deliverables: ['Live Operations Flow', '20+ hrs/wk Recovered']
+    desc: 'We launch the automation, train your staff to make sure they are comfortable, and set up automatic monitoring. Your team gains back 20+ hours every week to focus on growing your revenue.',
+    deliverables: ['Fully Automated Operations', 'Dedicated Staff Training']
   }
 ];
 
@@ -48,10 +48,10 @@ export const Process: React.FC = () => {
               marginBottom: 'var(--space-2)'
             }}
           >
-            How we engineer <span className="editorial-serif">flow</span>
+            Three simple steps to <span className="editorial-serif">automate your business</span>
           </h2>
           <p style={{ maxWidth: '520px', fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)' }}>
-            Three phases. No ambiguity. We replace chaotic manual processes with automated infrastructure using a transparent deployment pipeline.
+            Our process is simple and transparent. We work with your team to replace manual chaos with automatic systems that run themselves.
           </p>
         </div>
 
@@ -98,6 +98,22 @@ export const Process: React.FC = () => {
               const accentColor = phaseAccents[index];
               return (
                 <div key={phase.num} className="pipeline-step-node">
+                  {/* Vertical connector line between nodes on mobile */}
+                  {index < phases.length - 1 && (
+                    <div className="pipeline-connector-vertical">
+                      <svg className="connector-svg-vertical" width="4" height="100%" preserveAspectRatio="none" fill="none">
+                        <defs>
+                          <linearGradient id={`vertical-grad-${index}`} x1="0" y1="0" x2="0" y2="100%" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stopColor={accentColor} />
+                            <stop offset="100%" stopColor={phaseAccents[index + 1]} />
+                          </linearGradient>
+                        </defs>
+                        <line x1="2" y1="0" x2="2" y2="100%" stroke={`url(#vertical-grad-${index})`} strokeWidth="2" opacity="0.35" />
+                        <line className="pulse-line-vertical" x1="2" y1="0" x2="2" y2="100%" stroke={`url(#vertical-grad-${index})`} strokeWidth="2.5" />
+                      </svg>
+                    </div>
+                  )}
+
                   {/* Glowing Node Joint */}
                   <div className="node-joint-outer" style={{ borderColor: accentColor }}>
                     <div className="node-joint-inner" style={{ backgroundColor: accentColor }} />
@@ -144,7 +160,7 @@ export const Process: React.FC = () => {
                       borderTop: '1px solid var(--color-border)',
                       paddingTop: 'var(--space-3)'
                     }}>
-                      <span style={{ fontFamily: 'var(--font-heading-mono)', fontSize: '0.55rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>DELIVERABLES:</span>
+                      <span style={{ fontFamily: 'var(--font-heading-mono)', fontSize: '0.55rem', color: 'var(--color-text-muted)', fontWeight: 700 }}>WHAT YOU GET:</span>
                       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
                         {phase.deliverables.map((d, i) => (
                           <span
@@ -188,6 +204,35 @@ export const Process: React.FC = () => {
           z-index: 1;
         }
 
+        .pipeline-connector-vertical {
+          position: absolute;
+          top: 50%;
+          height: calc(100% + var(--space-5));
+          left: 20px;
+          width: 4px;
+          z-index: 1;
+          display: block;
+        }
+
+        .connector-svg-vertical {
+          display: block;
+          overflow: visible;
+        }
+
+        .pulse-line-vertical {
+          stroke-dasharray: 30 150;
+          animation: travelVertical 3s linear infinite;
+        }
+
+        @keyframes travelVertical {
+          from {
+            stroke-dashoffset: 0;
+          }
+          to {
+            stroke-dashoffset: -180;
+          }
+        }
+
         .pipeline-svg {
           display: block;
           overflow: visible;
@@ -219,9 +264,14 @@ export const Process: React.FC = () => {
           position: relative;
           display: flex;
           flex-direction: column;
+          padding-left: 44px;
         }
 
         .node-joint-outer {
+          position: absolute;
+          left: 10px;
+          top: 50%;
+          transform: translateY(-50%);
           width: 24px;
           height: 24px;
           border-radius: 50%;
@@ -230,9 +280,6 @@ export const Process: React.FC = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-bottom: var(--space-3);
-          margin-left: 20px;
-          position: relative;
           z-index: 3;
         }
 
@@ -254,14 +301,18 @@ export const Process: React.FC = () => {
 
         .phase-number-tag {
           display: block;
-          font-size: 0.6rem;
-          font-weight: 700;
+          font-size: 0.72rem;
+          font-weight: 800;
           letter-spacing: 0.05em;
           margin-bottom: var(--space-2);
         }
 
         /* Desktop specific alignments and pipelines */
         @media (min-width: 768px) {
+          .pipeline-connector-vertical {
+            display: none;
+          }
+
           .pipeline-track-svg-container {
             display: block;
           }
@@ -273,9 +324,14 @@ export const Process: React.FC = () => {
 
           .pipeline-step-node {
             align-items: center;
+            padding-left: 0;
           }
 
           .node-joint-outer {
+            position: relative;
+            left: auto;
+            top: auto;
+            transform: none;
             margin-left: 0;
             margin-bottom: var(--space-5);
           }

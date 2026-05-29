@@ -47,9 +47,9 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
       setLeakedLeads(0);
       setAdminDrain(0);
       setTotalAnnualLeak(0);
-      setVerdictTitle('SYSTEM STATE: STREAMLINED');
+      setVerdictTitle('OPERATIONS: STREAMLINED');
       setVerdictColor('var(--color-accent)');
-      setVerdictAdvice('Zero friction checkpoints flagged. Your company operations are fully streamlined and operating under nominal specs.');
+      setVerdictAdvice('Zero operational pain-points flagged. Your business operations are running smoothly with nominal manual overhead.');
       return;
     }
 
@@ -82,20 +82,20 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
     // 5. Diagnostics verdicts
     if (score <= 30) {
       setVerdictColor('var(--color-accent)');
-      setVerdictTitle('SYSTEM STATE: STEADY');
-      setVerdictAdvice(`Friction Rating: Low (${score}%). Your workflow is relatively smooth, but introducing WhatsApp Business auto-replies and Tally-POS syncs will save your staff up to ${hours * 4} hours per month.`);
+      setVerdictTitle('OPERATIONS: RELATIVELY STEADY');
+      setVerdictAdvice(`Friction Rating: Low (${score}%). Your workflow is relatively smooth, but introducing WhatsApp Business auto-replies and Tally syncs will save your staff up to ${hours * 4} hours per month.`);
     } else if (score <= 60) {
       setVerdictColor('var(--color-warning)');
-      setVerdictTitle('SYSTEM STATE: UNSTABLE');
-      setVerdictAdvice(`Friction Rating: Moderate (${score}%). Siloed software and delayed replies to Justdial/Google Business inquiries are costing you customers. Integrating your lead sources into Zoho CRM with auto-WhatsApp replies will lock in clients faster.`);
+      setVerdictTitle('OPERATIONS: LOSING INQUIRIES');
+      setVerdictAdvice(`Friction Rating: Moderate (${score}%). Disconnected software and slow replies to Justdial/Google inquiries are costing you customers. Connecting your lead sources with automated WhatsApp replies will secure clients instantly.`);
     } else if (score <= 80) {
       setVerdictColor('var(--color-danger)');
-      setVerdictTitle('SYSTEM STATE: DEGRADED');
-      setVerdictAdvice(`Friction Rating: High (${score}%). Manual double-entry between Tally, your POS, and spreadsheets is burning out staff. Automating GST invoicing and billing into custom portals is highly recommended.`);
+      setVerdictTitle('OPERATIONS: STAFF BURNOUT');
+      setVerdictAdvice(`Friction Rating: High (${score}%). Staff is wasting hours typing the same invoice data between Razorpay, your POS, and Tally. Automating GST invoicing and billing with custom portals is highly recommended to save time and errors.`);
     } else {
       setVerdictColor('var(--color-danger)');
-      setVerdictTitle('SYSTEM STATE: CRITICAL FAULT');
-      setVerdictAdvice(`Friction Rating: Critical (${score}%). Severe operational overhead. Staff is drowning in copy-paste loops between WhatsApp, Tally, and spreadsheets while delayed quotes bleed bookings to competitors. Immediate workflow engineering required.`);
+      setVerdictTitle('OPERATIONS: CRITICAL DRAIN');
+      setVerdictAdvice(`Friction Rating: Critical (${score}%). Severe operations drain. Your staff is drowning in copy-pasting between WhatsApp, Tally, and spreadsheets while delayed replies let hot inquiries slip to competitors. Immediate automation is highly recommended.`);
     }
   }, [painPoints]);
 
@@ -117,10 +117,10 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
               marginBottom: 'var(--space-2)'
             }}
           >
-            The silent <span className="editorial-serif">operations drain</span>
+            Calculate how much <span className="editorial-serif">time and money you are losing</span>
           </h2>
           <p style={{ maxWidth: '520px', fontSize: 'var(--font-size-sm)' }}>
-            Manual spreadsheets and WhatsApp groups leak lakhs of rupees in wasted payroll and lost leads. Calculate your potential drainage.
+            When your staff spends hours manually managing leads, copy-pasting data, and chasing payments, you lose lakhs. Calculate your potential savings below.
           </p>
         </div>
 
@@ -149,11 +149,11 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
                 {[
-                  { key: 'sync', title: 'Manual Lead Syncs', desc: 'We manually copy customer bookings from Justdial, WhatsApp, Google Maps, or IndiaMART to spreadsheets. (Wastes 4-6 hrs/wk).' },
-                  { key: 'sheets', title: 'Siloed Software', desc: 'Tally ERP, Razorpay POS, staff calendars, and customer files are separate — constant manual double-entry.' },
-                  { key: 'leads', title: 'Slow WhatsApp Response', desc: 'Justdial and IndiaMART inquiries sit unanswered >15 mins, losing clients to competitors who reply faster.' },
-                  { key: 'social', title: 'Manual Promotions', desc: 'Staff manually formats and publishes offers across Justdial, Google Business Profile, WhatsApp Status, and Instagram.' },
-                  { key: 'admin', title: 'Delayed GST Invoicing', desc: 'Hours spent drafting PDF quotations, sending WhatsApp bills, and chasing collections manually at month-end.' }
+                  { key: 'sync', title: 'Manual Lead Copying', desc: 'Copying customer inquiries from Justdial, IndiaMART, WhatsApp, or website forms into spreadsheets by hand.' },
+                  { key: 'sheets', title: 'Double-entry in Tally', desc: 'Staff manually re-typing appointment details, Razorpay/POS collections, and customer records into Tally ERP.' },
+                  { key: 'leads', title: 'Slow WhatsApp Response', desc: 'Customer inquiries sit unanswered for >15 minutes, losing clients to faster competitors.' },
+                  { key: 'social', title: 'Manual Promo Publishing', desc: 'Staff wasting hours formatting and uploading deals across Justdial, Google Business Profile, and Instagram.' },
+                  { key: 'admin', title: 'Chasing Pending Payments', desc: 'Hours spent manually drafting quotations, sending PDF bills, and chasing collections on WhatsApp at month-end.' }
                 ].map((item) => (
                   <label 
                     key={item.key} 
@@ -196,7 +196,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
                   fontSize: 'var(--font-size-sm)'
                 }}
               >
-                <span>ESTIMATED WEEKLY TIME DRAIN:</span>
+                <span>ESTIMATED WEEKLY TIME LOST:</span>
                 <span style={{ fontWeight: 800, color: 'var(--color-warning)', fontSize: '1.2rem' }}>
                   {hoursWasted}h/week
                 </span>
@@ -226,7 +226,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
               }}
             >
               <h4 style={{ fontFamily: 'var(--font-heading-mono)', fontSize: '0.65rem', color: 'var(--color-text-secondary)', letterSpacing: '0.05em' }}>
-                DIAGNOSTIC REPORT // SEC.801
+                ANNUAL LOSS REPORT
               </h4>
               
               <span 
@@ -240,7 +240,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
                   borderRadius: '1px'
                 }}
               >
-                {computedScore > 0 ? 'STATUS: ACTIVE LEAKS' : 'STATUS: OPTIMIZED'}
+                {computedScore > 0 ? 'POTENTIAL SAVINGS OPPORTUNITY' : 'OPERATIONS OPTIMIZED'}
               </span>
             </div>
 
@@ -304,7 +304,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
                     {computedScore}%
                   </span>
                   <span style={{ fontFamily: 'var(--font-heading)', fontSize: '0.55rem', fontWeight: 700, color: 'var(--color-text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-                    Friction
+                    Chaos
                   </span>
                 </div>
               </div>
@@ -320,19 +320,19 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
                 }}
               >
                 <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dashed var(--color-border)', paddingBottom: '4px' }}>
-                  <span>WASTED LABOUR:</span>
+                  <span>WASTED STAFF SALARY:</span>
                   <span style={{ fontWeight: 700, color: wastedLabor > 0 ? 'var(--color-danger)' : 'var(--color-accent)' }}>
                     {formatCurrency(wastedLabor)}/mo
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dashed var(--color-border)', paddingBottom: '4px' }}>
-                  <span>LEAKED LEADS:</span>
+                  <span>LOST BOOKINGS:</span>
                   <span style={{ fontWeight: 700, color: leakedLeads > 0 ? 'var(--color-danger)' : 'var(--color-accent)' }}>
                     {formatCurrency(leakedLeads)}/mo
                   </span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px dashed var(--color-border)', paddingBottom: '4px' }}>
-                  <span>ADMINISTRATIVE:</span>
+                  <span>ADMIN BILLING GAPS:</span>
                   <span style={{ fontWeight: 700, color: adminDrain > 0 ? 'var(--color-danger)' : 'var(--color-accent)' }}>
                     {formatCurrency(adminDrain)}/mo
                   </span>
@@ -350,7 +350,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
                     transition: 'background-color var(--transition-normal), border-color var(--transition-normal)'
                   }}
                 >
-                  <span style={{ fontWeight: 800, fontSize: '0.62rem', color: 'var(--color-text-muted)', letterSpacing: '0.05em' }}>ANNUAL REVENUE LEAK</span>
+                  <span style={{ fontWeight: 800, fontSize: '0.62rem', color: 'var(--color-text-muted)', letterSpacing: '0.05em' }}>ANNUAL PROFIT LOST</span>
                   <span style={{ fontWeight: 800, fontSize: '1.25rem', color: computedScore > 0 ? 'var(--color-danger)' : 'var(--color-accent)', textShadow: computedScore > 0 ? '0 0 8px rgba(239, 68, 68, 0.2)' : 'none', fontFamily: 'var(--font-heading-mono)' }}>
                     {formatCurrency(totalAnnualLeak)}/yr
                   </span>
@@ -382,7 +382,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ onOpenAudit }) => {
               className="btn-core btn-pixel-brutal"
               style={{ width: '100%', paddingBlock: '12px', fontSize: 'var(--font-size-sm)', textAlign: 'center', fontWeight: 800 }}
             >
-              Request Free Leak Repair Blueprint →
+              Claim Free Operations Blueprint →
             </button>
           </div>
         </div>

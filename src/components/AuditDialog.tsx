@@ -79,7 +79,7 @@ export const AuditDialog: React.FC<AuditDialogProps> = ({
           }}
         >
           <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 800 }}>
-            REQUEST REVENUE LEAK BLUEPRINT
+            GET YOUR FREE OPERATIONS ROADMAP
           </h3>
           <button 
             onClick={onClose}
@@ -104,16 +104,16 @@ export const AuditDialog: React.FC<AuditDialogProps> = ({
         {/* Audit Form */}
         <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-3)' }}>
           <p style={{ fontSize: '0.8rem', color: 'var(--color-text-secondary)', lineHeight: 1.5, marginBottom: '8px' }}>
-            Submit your details to compile your Leak Repair Blueprint. Plug your annual silent operational leak (computed at{' '}
+            Fill in your details below to get a customized roadmap showing you exactly how to automate your operations. Plug your annual profit leak (computed at{' '}
             <span style={{ fontWeight: 800, fontFamily: 'var(--font-heading-mono)', color: 'var(--color-danger)', textDecoration: 'underline' }}>
               {computedLeak || '₹0/yr'}
             </span>
-            ) and secure your margins.
+            ) and scale your business without daily headaches.
           </p>
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <label htmlFor="lead-name" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-xs)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-              Contact Name *
+              Your Name *
             </label>
             <input 
               type="text" 
@@ -137,7 +137,7 @@ export const AuditDialog: React.FC<AuditDialogProps> = ({
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <label htmlFor="lead-email" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-xs)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-              Business Email *
+              Your Email *
             </label>
             <input 
               type="email" 
@@ -161,14 +161,14 @@ export const AuditDialog: React.FC<AuditDialogProps> = ({
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <label htmlFor="lead-company" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-xs)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-              Company Website / Name
+              Company Name
             </label>
             <input 
               type="text" 
               id="lead-company"
               value={company}
               onChange={(e) => setCompany(e.target.value)}
-              placeholder="sharmaclinics.in"
+              placeholder="Sharma Diagnostics or Raj Traders"
               style={{
                 backgroundColor: 'var(--color-bg)',
                 border: '1px solid var(--color-border)',
@@ -184,20 +184,20 @@ export const AuditDialog: React.FC<AuditDialogProps> = ({
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
             <label htmlFor="lead-msg" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-xs)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-              Briefly describe your worst workflow bottleneck
+              What is your biggest daily operations headache?
             </label>
             <textarea 
               id="lead-msg"
               value={bottleneck}
               onChange={(e) => setBottleneck(e.target.value)}
-              placeholder="We waste hours manually copy-pasting Justdial leads into WhatsApp groups and re-entering Tally invoices..."
+              placeholder="e.g., We waste hours manually copy-pasting leads or re-keying Tally bills..."
               style={{
                 backgroundColor: 'var(--color-bg)',
                 border: '1px solid var(--color-border)',
                 padding: '10px',
                 color: 'var(--color-text-primary)',
                 borderRadius: 'var(--radius-sm)',
-                minHeight: '80px',
+                minHeight: '110px',
                 resize: 'vertical',
                 outline: 'none',
                 fontSize: '0.85rem'
@@ -206,13 +206,13 @@ export const AuditDialog: React.FC<AuditDialogProps> = ({
             />
           </div>
 
-          <div style={{ marginTop: 'var(--space-2)' }}>
+          <div style={{ marginTop: 'var(--space-4)' }}>
             <button 
               type="submit"
               className="btn-core btn-pixel-brutal"
               style={{ width: '100%', paddingBlock: '12px', fontSize: 'var(--font-size-sm)', fontWeight: 800 }}
             >
-              Send Diagnostics →
+              Get Free Roadmap →
             </button>
           </div>
         </form>

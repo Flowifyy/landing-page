@@ -14,17 +14,17 @@ export const FrictionFlow: React.FC = () => {
               marginBottom: 'var(--space-2)'
             }}
           >
-            Your staff is <span className="editorial-serif" style={{ color: 'var(--color-danger)' }}>burning out</span>. Here's why.
+            Manual operations are <span className="editorial-serif" style={{ color: 'var(--color-danger)' }}>holding you back</span>. Here's why.
           </h2>
           <p style={{ maxWidth: '520px', fontSize: 'var(--font-size-sm)' }}>
-            Most businesses treat operational friction with more hires. We replace the friction itself with automated infrastructure.
+            Most business owners try to solve daily operations chaos by hiring more staff. We solve it permanently by making your software work for you.
           </p>
         </div>
         
         {/* Comparison grid */}
         <div className="grid-layout" style={{ alignItems: 'start' }}>
           {/* Card A: Friction Status Quo */}
-          <div className="card-premium" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface)' }}>
+          <div className="card-premium" style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-surface-subtle)' }}>
             <div 
               style={{
                 fontFamily: 'var(--font-heading-mono)',
@@ -35,22 +35,22 @@ export const FrictionFlow: React.FC = () => {
                 padding: '2px 6px',
                 display: 'inline-block',
                 marginBottom: 'var(--space-4)',
-                backgroundColor: 'var(--color-bg)'
+                backgroundColor: 'var(--color-surface)'
               }}
             >
-              SYSTEM FRICTION // HIGH LATENCY
+              DAILY CHAOS // MANUAL WORK
             </div>
             
             <h3 style={{ fontSize: 'var(--font-size-h3)', marginBottom: 'var(--space-4)', color: 'var(--color-text-secondary)' }}>
-              The Status Quo
+              The Old Way (Manual Chaos)
             </h3>
             
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
               {[
-                { title: 'Manual Lead Syncs', desc: 'Copying customer inquiries from Justdial, Google Maps, WhatsApp, and Instagram into spreadsheets by hand.' },
-                { title: 'Siloed Tally & POS', desc: 'Staff re-typing appointment data, Razorpay payments, and Tally invoices across disconnected systems.' },
-                { title: 'Delayed WhatsApp Reply', desc: 'Justdial and Instagram inquiries sit unanswered for hours, causing prospects to call competitors.' },
-                { title: 'Tedious Promo Updates', desc: 'Hours spent formatting and uploading offers manually across Google Business Profile, Justdial, and Social Media.' }
+                { title: 'Manual Lead Copying', desc: 'Copying customer inquiries from Justdial, Google Maps, WhatsApp, and IndiaMART into Excel sheets one-by-one.' },
+                { title: 'Tally Double-Entry', desc: 'Staff wasting hours typing Razorpay payments, customer details, and invoices manually into Tally ERP.' },
+                { title: 'Missed & Delayed Leads', desc: 'Justdial and Google inquiries sit unanswered for hours, letting hot leads slip away to faster competitors.' },
+                { title: 'Chasing Staff for Updates', desc: 'Calling and messaging staff constantly to track order statuses, pending bills, and customer updates.' }
               ].map((item, idx) => (
                 <li key={idx} style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'start' }}>
                   <XCircle size={18} style={{ color: 'var(--color-danger)', marginTop: '2px', flexShrink: 0 }} />
@@ -85,9 +85,9 @@ export const FrictionFlow: React.FC = () => {
             }}>VS</span>
             <div style={{ height: '1px', flex: 1, backgroundColor: 'var(--color-border)' }} />
           </div>
-
+ 
           {/* Card B: Flowify Solution */}
-          <div className="card-premium" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-surface-subtle)', boxShadow: '0 8px 32px rgba(16, 185, 129, 0.04)' }}>
+          <div className="card-premium" style={{ borderColor: 'var(--color-accent)', backgroundColor: 'var(--color-surface)', boxShadow: '0 8px 32px rgba(16, 185, 129, 0.08)' }}>
             <div 
               style={{
                 fontFamily: 'var(--font-heading-mono)',
@@ -98,22 +98,22 @@ export const FrictionFlow: React.FC = () => {
                 padding: '2px 6px',
                 display: 'inline-block',
                 marginBottom: 'var(--space-4)',
-                backgroundColor: 'var(--color-bg)'
+                backgroundColor: 'var(--color-surface-subtle)'
               }}
             >
-              SYSTEM FLOW // FULL ENGINE SYNC
+              FLOWIFY WAY // 100% AUTOMATED
             </div>
             
             <h3 style={{ fontSize: 'var(--font-size-h3)', marginBottom: 'var(--space-4)', color: 'var(--color-text-primary)' }}>
-              The Flowify Solution
+              The Flowify Way (Automated Operations)
             </h3>
             
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
               {[
-                { title: 'Autonomous Ingest', desc: 'Justdial, WhatsApp, and Instagram inquiries route instantly into Zoho CRM, notifying staff on WhatsApp Business within seconds.' },
-                { title: 'Integrated Systems', desc: 'Razorpay payments automatically update Tally ERP, trigger GST-compliant invoices, and sync customer records across all systems.' },
-                { title: 'Instant WhatsApp Reply', desc: 'Google Business and Justdial leads trigger automated WhatsApp booking links within 3 minutes, securing bookings first.' },
-                { title: 'Programmatic Local Promos', desc: 'One centralized dashboard formats and pushes offers across Google Business Profile, Justdial & Instagram automatically.' }
+                { title: '100% Auto-Capture Leads', desc: 'Justdial, IndiaMART, and website leads route instantly to your sales team with automatic WhatsApp alerts.' },
+                { title: 'Automatic Tally Sync', desc: 'Razorpay and website payments automatically create correct invoices and sync customer files directly in Tally ERP.' },
+                { title: 'Instant Auto-WhatsApp replies', desc: 'Inquiries get an automatic WhatsApp welcome message and booking link within 3 minutes, securing customers first.' },
+                { title: 'All-in-One Live Dashboard', desc: 'A single, clean screen displays real-time orders, pending staff tasks, and collections so you always know what\'s happening.' }
               ].map((item, idx) => (
                 <li key={idx} style={{ display: 'flex', gap: 'var(--space-3)', alignItems: 'start' }}>
                   <CheckCircle size={18} style={{ color: 'var(--color-accent)', marginTop: '2px', flexShrink: 0 }} />

@@ -10,27 +10,27 @@ interface EngineService {
 const engines: EngineService[] = [
   {
     num: '01',
-    title: 'Bespoke Applications',
-    desc: 'Proprietary interfaces tailored to your team. We design and construct clean web and mobile applications. Stop bending your business around rigid off-the-shelf software; we write custom portals, databases, and admin dashboards designed strictly for your daily operations.',
-    stack: 'React / Next.js / Node.js / PostgreSQL / Zoho Creator'
+    title: 'Custom Apps & Portals',
+    desc: 'Software built exactly for your business. No more adjusting your daily operations around rigid, expensive off-the-shelf software. We build simple custom portals, admin dashboards, and mobile apps so your team can manage orders, inventory, and staff in one clean screen.',
+    stack: 'React / Next.js / PostgreSQL / Zoho Creator / Custom Admin Panels'
   },
   {
     num: '02',
-    title: 'Intelligent Automations',
-    desc: 'Resilient API relays replacing manual copy-paste. We link your daily software tools—Tally, Zoho, WhatsApp—with silent, self-healing pipelines that autonomously sync customer billing, inventory registers, and lead files.',
-    stack: 'WhatsApp Business API / Make / Zapier / Zoho Flow / Tally API'
+    title: 'Tally & WhatsApp Sync',
+    desc: 'Stop manual copy-paste between systems. We connect your daily business tools—Tally, WhatsApp Business, Zoho, and spreadsheets—so customer billing, inventory levels, and lead updates sync automatically in the background without human errors.',
+    stack: 'WhatsApp Business API / Tally API / Zoho Flow / Make / Zapier'
   },
   {
     num: '03',
-    title: 'Growth Marketing',
-    desc: 'Social media campaigns and integrated ad funnels that capture high-intent prospects first. We construct high-converting Instagram & Meta campaigns, programmatic SEO networks, automated Google Maps profile optimization, integrated Razorpay checkouts, and custom analytics dashboards that turn traffic into bookings.',
-    stack: 'Meta Ads Manager / Instagram API / Google Analytics / Search Console / Razorpay / Shiprocket'
+    title: 'Leads & Payment Checkouts',
+    desc: 'Get high-intent customer inquiries flowing directly to your sales team. We launch high-converting Meta & Instagram campaigns, auto-sync Google Maps and Justdial profiles, and connect Razorpay or Shiprocket checkouts so customers can book and pay instantly.',
+    stack: 'Meta & Instagram Ads / Google Profile Sync / Razorpay Checkout / Shiprocket'
   },
   {
     num: '04',
-    title: 'Social Engine',
-    desc: 'Automated brand syndication dashboards. We structure social media publishing grids that format and post graphics across Instagram, Twitter, and LinkedIn, keeping listings updated with zero human overhead.',
-    stack: 'WhatsApp Business API / Meta API / Google Business / Justdial / Custom Automations'
+    title: 'Social Media Auto-Post',
+    desc: 'Keep your business profiles active with zero effort. We build automated social dashboards that format and post your promotions, deals, and updates across Instagram, LinkedIn, and Google Business simultaneously, keeping your customers engaged while you focus on operations.',
+    stack: 'WhatsApp Status / Meta API / Google Business Profile / Justdial / Custom Social Dashboards'
   }
 ];
 
@@ -53,10 +53,10 @@ export const Services: React.FC = () => {
                 marginBottom: 'var(--space-3)'
               }}
             >
-              Four operational <span className="editorial-serif" style={{ color: 'var(--color-accent)' }}>engines</span> built for your business.
+              Four ways we automate your <span className="editorial-serif" style={{ color: 'var(--color-accent)' }}>daily business chaos</span>.
             </h2>
             <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', lineHeight: 1.6, maxWidth: '440px' }}>
-              We do not sell boxed SaaS subscriptions. We engineer bespoke, resilient operations machinery. Hover over each engine to inspect its schematic.
+              We don't sell generic software subscriptions. We build custom operations setups that work exactly the way you do. Hover over each setup below to see what it handles.
             </p>
           </div>
           
@@ -97,11 +97,11 @@ export const Services: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="engine-strip-body" style={{ maxHeight: isHovered ? '300px' : '0px' }}>
+                  <div className="engine-strip-body" style={{ maxHeight: isHovered ? '600px' : '0px' }}>
                     <div className="engine-strip-content">
                       <p className="engine-desc">{engine.desc}</p>
                       <div className="engine-stack-wrapper">
-                        <span className="engine-stack-label" style={{ color: activeColor }}>ACTIVE INFRASTRUCTURE:</span>
+                        <span className="engine-stack-label" style={{ color: activeColor }}>WHAT WE USE:</span>
                         <p className="engine-stack-tech">{engine.stack}</p>
                       </div>
                     </div>

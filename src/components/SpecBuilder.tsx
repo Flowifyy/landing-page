@@ -22,7 +22,7 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (selectedModules.length === 0) {
-      alert("SPEC INQUIRY ERROR\n--------------------------------\nZero modules selected. Please choose at least one system module below before compiling.");
+      alert("Oops! Please select at least one automation module below before submitting.");
       return;
     }
 
@@ -36,11 +36,11 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
   };
 
   const modulesList = [
-    { name: 'Bespoke Applications', label: 'BESPOKE APPS', icon: Monitor },
-    { name: 'Intelligent Automations', label: 'AUTOMATIONS', icon: Cpu },
-    { name: 'Growth Marketing', label: 'GROWTH FUNNELS', icon: TrendingUp },
-    { name: 'Social Engine', label: 'SOCIAL ENGINES', icon: Share2 },
-    { name: 'Operational Consulting', label: 'STRATEGY / OTHER', icon: Compass }
+    { name: 'Custom Apps & Portals', label: 'CUSTOM PORTALS', icon: Monitor },
+    { name: 'Tally & WhatsApp Sync', label: 'TALLY & WHATSAPP SYNC', icon: Cpu },
+    { name: 'Leads & Payment Checkouts', label: 'LEADS & PAYMENTS', icon: TrendingUp },
+    { name: 'Social Media Auto-Post', label: 'SOCIAL AUTO-POST', icon: Share2 },
+    { name: 'Operational Consulting', label: 'EXPERT OPERATION AUDIT', icon: Compass }
   ];
 
   return (
@@ -55,17 +55,17 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
               marginBottom: 'var(--space-2)'
             }}
           >
-            Build your <span className="editorial-serif">system specification</span>
+            Design your <span className="editorial-serif">automation setup</span>
           </h2>
           <p style={{ maxWidth: '520px', fontSize: 'var(--font-size-sm)' }}>
-            Select the operational modules your company requires to construct a custom schematic proposal.
+            Choose the areas you want to automate in your business to get a custom roadmap and proposal.
           </p>
         </div>
 
         {/* Spec Configurator Card */}
         <div className="card-premium" style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-text-primary)' }}>
           <h3 style={{ fontSize: 'var(--font-size-h3)', fontFamily: 'var(--font-heading)', marginBottom: 'var(--space-4)', color: 'var(--color-text-primary)' }}>
-            Select Required Modules:
+            What do you want to automate?
           </h3>
 
           {/* Module interactive button grid */}
@@ -132,7 +132,7 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
               marginBottom: 'var(--space-5)'
             }}
           >
-            <span style={{ color: 'var(--color-text-muted)' }}>ACTIVE CONFIGURATION:</span>
+            <span style={{ color: 'var(--color-text-muted)' }}>YOUR SELECTION:</span>
             <span style={{ color: selectedModules.length > 0 ? 'var(--color-text-primary)' : 'var(--color-text-muted)', fontWeight: 700 }}>
                {selectedModules.length > 0 ? selectedModules.join(' + ').toUpperCase() : 'NONE SELECTED'}
             </span>
@@ -150,7 +150,7 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label htmlFor="spec-name" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-                  Company Contact Name *
+                  Your Name *
                 </label>
                 <input 
                   type="text" 
@@ -173,7 +173,7 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label htmlFor="spec-email" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-                  Business Email *
+                  Your Email *
                 </label>
                 <input 
                   type="email" 
@@ -197,21 +197,21 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
               <label htmlFor="spec-bottleneck" style={{ fontFamily: 'var(--font-heading)', fontSize: 'var(--font-size-sm)', fontWeight: 800, color: 'var(--color-text-secondary)' }}>
-                Briefly describe your company\'s operational bottlenecks *
+                What is the biggest operational headache in your business? *
               </label>
               <textarea 
                 id="spec-bottleneck"
                 value={bottleneck}
                 onChange={(e) => setBottleneck(e.target.value)}
                 required
-                placeholder="Our Tally entries go out of sync, and we waste hours copy-pasting Justdial leads into WhatsApp groups manually..."
+                placeholder="e.g., We waste 3 hours copy-pasting leads or manually re-entering invoices in Tally..."
                 style={{
                   backgroundColor: 'var(--color-bg)',
                   border: '1px solid var(--color-border)',
                   padding: 'var(--space-3)',
                   color: 'var(--color-text-primary)',
                   borderRadius: 'var(--radius-sm)',
-                  minHeight: '100px',
+                  minHeight: '140px',
                   resize: 'vertical',
                   outline: 'none'
                 }}
@@ -219,13 +219,13 @@ export const SpecBuilder: React.FC<SpecBuilderProps> = ({ onSubmitInquiry }) => 
               />
             </div>
 
-            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-2)' }}>
+            <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 'var(--space-4)' }}>
               <button 
                 type="submit" 
                 className="btn-core btn-pixel-brutal"
                 style={{ fontWeight: 800 }}
               >
-                Compile & Deploy Spec Inquiry [EXECUTE] →
+                Send Automation Request →
               </button>
             </div>
           </form>

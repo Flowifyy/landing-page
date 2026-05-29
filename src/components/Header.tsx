@@ -5,32 +5,40 @@ interface HeaderProps {
   onOpenAudit: () => void;
 }
 
+const navLinks = [
+  { name: 'Chaos vs Flow', anchor: '#friction' },
+  { name: 'What We Do', anchor: '#engines' },
+  { name: 'How It Works', anchor: '#process' },
+  { name: 'Profit Calculator', anchor: '#audit-tool' },
+  { name: 'Get Started', anchor: '#build-spec' }
+];
+
 export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
-  const [theme, setTheme] = useState<'dark' | 'light'>('dark');
+  const [theme, setTheme] = useState<'dark' | 'light'>('light');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Initialize and track theme
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
-    const initialTheme = savedTheme || (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+    const initialTheme = savedTheme || 'light';
     setTheme(initialTheme);
-    if (initialTheme === 'light') {
-      document.documentElement.classList.add('light');
+    if (initialTheme === 'dark') {
+      document.documentElement.classList.add('dark');
     } else {
-      document.documentElement.classList.remove('light');
+      document.documentElement.classList.remove('dark');
     }
   }, []);
 
   const toggleTheme = () => {
     const nextTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(nextTheme);
-    if (nextTheme === 'light') {
-      document.documentElement.classList.add('light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.classList.remove('light');
+    if (nextTheme === 'dark') {
+      document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
     }
   };
 
@@ -65,22 +73,55 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
         <a 
           href="#hero" 
           onClick={() => setMobileMenuOpen(false)}
-          style={{ display: 'flex', flexDirection: 'column', fontFamily: 'var(--font-heading-mono)', fontSize: '1.25rem', fontWeight: 800, letterSpacing: '-0.04em' }}
+          style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
         >
-          FLOWIFY
-          <span style={{ fontSize: '0.55rem', fontWeight: 400, letterSpacing: '0.05em', color: 'var(--color-text-secondary)', marginTop: '-2px' }}>
-            THE BUSINESS ENGINE<span style={{ animation: 'blink 1.5s infinite steps(2)' }}>_</span>
-          </span>
+          {/* Flowify Pixel Logo SVG */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <svg 
+              width="110" 
+              height="26" 
+              viewBox="0 0 40 10" 
+              fill="currentColor" 
+              style={{ flexShrink: 0, display: 'block', color: 'var(--color-text-primary)' }}
+            >
+              {/* F */}
+              <path d="M0,0 h2 v9 h-2 z M2,0 h4 v2 h-4 z M2,3 h3 v2 h-3 z" />
+              {/* l */}
+              <path d="M7,0 h2 v9 h-2 z" />
+              {/* o */}
+              <path d="M10,3 h2 v5 h-2 z M14,3 h2 v5 h-2 z M12,3 h2 v2 h-2 z M12,6 h2 v2 h-2 z" />
+              {/* w */}
+              <path d="M17,3 h2 v4 h-2 z M23,3 h2 v4 h-2 z M20,5 h2 v2 h-2 z M17,7 h8 v1 h-8 z" />
+              {/* i */}
+              <path d="M26,3 h2 v5 h-2 z M26,0 h2 v2 h-2 z" />
+              {/* f */}
+              <path d="M29,3 h4 v2 h-4 z M30,1 h2 v7 h-2 z M31,0 h2 v2 h-2 z" />
+              {/* y */}
+              <path d="M34,3 h2 v2 h-2 z M38,3 h2 v2 h-2 z M36,5 h2 v2 h-2 z M35,7 h2 v1 h-2 z M34,8 h2 v1 h-2 z M33,9 h2 v1 h-2 z" />
+            </svg>
+            <span 
+              style={{ 
+                fontFamily: 'var(--font-heading-mono)', 
+                fontSize: '0.48rem', 
+                fontWeight: 700, 
+                letterSpacing: '0.04em', 
+                color: 'var(--color-text-secondary)', 
+                marginTop: '4px',
+                textTransform: 'uppercase'
+              }}
+            >
+              AUTOMATE YOUR DAILY OPERATIONS
+            </span>
+          </div>
         </a>
 
         {/* Desktop Navigation Link Track */}
         <nav className="desktop-links" style={{ display: 'flex', gap: 'var(--space-5)', alignItems: 'center' }}>
-          {['Friction', 'Engines', 'Process', 'Audit Tool', 'Build Spec'].map((linkName) => {
-            const anchor = '#' + linkName.toLowerCase().replace(' ', '-');
+          {navLinks.map((link) => {
             return (
               <a 
-                key={linkName} 
-                href={anchor}
+                key={link.name} 
+                href={link.anchor}
                 className="nav-anchor"
                 style={{
                   fontFamily: 'var(--font-heading)',
@@ -91,7 +132,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
                   padding: '4px 8px'
                 }}
               >
-                {linkName}
+                {link.name}
               </a>
             );
           })}
@@ -128,7 +169,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
             className="btn-core btn-secondary-action btn-sm-action desktop-only"
             style={{ fontWeight: 700 }}
           >
-            Book Audit
+            Free Operations Audit
           </button>
 
           {/* Mobile hamburger menu */}
@@ -154,6 +195,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
             right: 0,
             backgroundColor: 'var(--color-surface)',
             borderBottom: '1px solid var(--color-border)',
+            boxShadow: 'var(--shadow-lg)',
             padding: 'var(--space-5)',
             display: 'flex',
             flexDirection: 'column',
@@ -161,12 +203,11 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
             zIndex: 999
           }}
         >
-          {['Friction', 'Engines', 'Process', 'Audit Tool', 'Build Spec'].map((linkName) => {
-            const anchor = '#' + linkName.toLowerCase().replace(' ', '-');
+          {navLinks.map((link) => {
             return (
               <a 
-                key={linkName} 
-                href={anchor}
+                key={link.name} 
+                href={link.anchor}
                 onClick={() => setMobileMenuOpen(false)}
                 style={{
                   fontFamily: 'var(--font-heading)',
@@ -177,7 +218,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
                   paddingBottom: '8px'
                 }}
               >
-                {linkName}
+                {link.name}
               </a>
             );
           })}
@@ -189,7 +230,7 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
             className="btn-core btn-primary-action"
             style={{ width: '100%', marginTop: 'var(--space-2)' }}
           >
-            Book Workflow Audit
+            Free Operations Audit
           </button>
         </div>
       )}
@@ -209,6 +250,20 @@ export const Header: React.FC<HeaderProps> = ({ onOpenAudit }) => {
         }
         .theme-switch:hover {
           border-color: var(--color-text-primary) !important;
+        }
+        .mobile-slide-drawer {
+          animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          transform-origin: top;
+        }
+        @keyframes slideDown {
+          from {
+            opacity: 0;
+            transform: translateY(-10px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
         @keyframes blink {
           0%, 100% { opacity: 1; }

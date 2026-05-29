@@ -30,14 +30,35 @@ export const Footer: React.FC = () => {
             <a 
               href="#hero" 
               style={{
-                fontFamily: 'var(--font-heading-mono)',
-                fontSize: '1.4rem',
-                fontWeight: 800,
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '4px',
                 color: 'var(--color-text-primary)',
-                letterSpacing: '-0.04em'
+                textDecoration: 'none'
               }}
             >
-              FLOWIFY
+              <svg 
+                width="110" 
+                height="26" 
+                viewBox="0 0 40 10" 
+                fill="currentColor" 
+                style={{ flexShrink: 0, display: 'block' }}
+              >
+                {/* F */}
+                <path d="M0,0 h2 v9 h-2 z M2,0 h4 v2 h-4 z M2,3 h3 v2 h-3 z" />
+                {/* l */}
+                <path d="M7,0 h2 v9 h-2 z" />
+                {/* o */}
+                <path d="M10,3 h2 v5 h-2 z M14,3 h2 v5 h-2 z M12,3 h2 v2 h-2 z M12,6 h2 v2 h-2 z" />
+                {/* w */}
+                <path d="M17,3 h2 v4 h-2 z M23,3 h2 v4 h-2 z M20,5 h2 v2 h-2 z M17,7 h8 v1 h-8 z" />
+                {/* i */}
+                <path d="M26,3 h2 v5 h-2 z M26,0 h2 v2 h-2 z" />
+                {/* f */}
+                <path d="M29,3 h4 v2 h-4 z M30,1 h2 v7 h-2 z M31,0 h2 v2 h-2 z" />
+                {/* y */}
+                <path d="M34,3 h2 v2 h-2 z M38,3 h2 v2 h-2 z M36,5 h2 v2 h-2 z M35,7 h2 v1 h-2 z M34,8 h2 v1 h-2 z M33,9 h2 v1 h-2 z" />
+              </svg>
             </a>
             <p style={{ fontSize: '0.8rem', lineHeight: 1.6 }}>
               Flowify engineers high-efficiency operational software, Tally ERP integrations, WhatsApp automations, and brand-amplification platforms for Indian businesses. We replace manual bottlenecks with persistent, self-healing code.

@@ -30,7 +30,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
                 color: 'var(--color-text-primary)'
               }}
             >
-              We build the <span className="editorial-serif" style={{ color: 'var(--color-accent)' }}>engines</span> that run your <span className="editorial-serif">business</span>.
+              We automate your <span className="editorial-serif" style={{ color: 'var(--color-accent)' }}>daily operations</span> so you can focus on <span className="editorial-serif">growth</span>.
             </h1>
 
             <div style={{ width: '64px', height: '2px', backgroundColor: 'var(--color-accent)', marginBottom: 'var(--space-3)' }} />
@@ -45,7 +45,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
                 marginBottom: 'var(--space-5)'
               }}
             >
-              <strong>Stop leaking margin on repetitive tasks.</strong> Every hour your staff spends copying Justdial leads, rekeying bills in Tally, or scheduling Instagram bookings manually is capital leaking from your business. Flowify constructs <strong>autonomous API relays</strong> and custom portals to plug these leaks permanently.
+              <strong>Stop wasting hours on daily business chaos.</strong> Every hour your staff spends manually copying inquiries from Justdial & IndiaMART, re-keying invoices in Tally, or chasing staff for updates is profit leaking from your pocket. Flowify builds <strong>simple, self-running automations</strong> to handle your daily operations—no coding or technical degrees needed.
             </p>
             
             <div style={{ display: 'flex', gap: 'var(--space-3)', flexWrap: 'wrap' }}>
@@ -54,14 +54,14 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
                 className="btn-core btn-pixel-brutal"
                 style={{ fontWeight: 800 }}
               >
-                Run Workflow Audit →
+                Run Operations Audit →
               </button>
               <a 
-                href="#spec-builder" 
-                className="btn-core btn-secondary-action"
-                style={{ fontWeight: 700 }}
+                href="#build-spec" 
+                className="btn-core btn-pixel-brutal"
+                style={{ fontWeight: 800 }}
               >
-                Explore Engines
+                Explore Custom Setups
               </a>
             </div>
 
@@ -73,9 +73,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
               borderTop: '1px solid var(--color-border)'
             }}>
               {[
-                { value: '200+', label: 'Automations Built' },
-                { value: '₹2.1Cr', label: 'Leaks Plugged' },
-                { value: '<3min', label: 'Avg Response Time' }
+                { value: '200+', label: 'Indian Businesses Automated' },
+                { value: '₹2.1Cr+', label: 'Leaks Plugged' },
+                { value: '<3 mins', label: 'Leads Captured & Handled' }
               ].map((stat, i) => (
                 <div key={i} style={{ display: 'flex', flexDirection: 'column' }}>
                   <span style={{ 
@@ -87,8 +87,9 @@ export const Hero: React.FC<HeroProps> = ({ onOpenAudit }) => {
                   }}>{stat.value}</span>
                   <span style={{ 
                     fontFamily: 'var(--font-heading-mono)', 
-                    fontSize: '0.6rem', 
-                    color: 'var(--color-text-muted)', 
+                    fontSize: 'clamp(0.7rem, 0.65rem + 0.2vw, 0.78rem)', 
+                    fontWeight: 700, 
+                    color: 'var(--color-text-secondary)', 
                     textTransform: 'uppercase' as const,
                     letterSpacing: '0.05em'
                   }}>{stat.label}</span>
