@@ -4,22 +4,18 @@ import React, { useState, useEffect } from 'react';
 import { Sun, Moon, Menu, X } from 'lucide-react';
 
 const navLinks = [
-  { name: 'Chaos vs Flow', anchor: '#friction' },
-  { name: 'What We Do', anchor: '#engines' },
-  { name: 'How It Works', anchor: '#process' },
-  { name: 'Profit Calculator', anchor: '#audit-tool' },
-  { name: 'Get Started', anchor: '#build-spec' }
+ 
 ];
 
 export const Header = ({ onOpenAudit }) => {
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Initialize and track theme
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
-    const initialTheme = savedTheme || 'light';
+    const initialTheme = savedTheme || 'dark';
     setTheme(initialTheme);
     if (initialTheme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -43,233 +39,304 @@ export const Header = ({ onOpenAudit }) => {
   // Scroll height shrink trigger
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <header 
-      className={`site-header-nav ${isScrolled ? 'scrolled' : ''}`}
+    <div
       style={{
         position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: isScrolled ? '64px' : '90px',
+        top: isScrolled ? '12px' : '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: 'calc(100% - 32px)',
+        maxWidth: '1200px',
         zIndex: 1000,
-        borderBottom: '1px solid var(--color-border)',
-        backgroundColor: 'color-mix(in srgb, var(--color-bg) 85%, transparent)',
-        backdropFilter: 'blur(16px)',
-        WebkitBackdropFilter: 'blur(16px)',
-        transition: 'height var(--transition-normal), background-color var(--transition-normal), border-color var(--transition-normal)'
+        transition: 'top 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
     >
-      <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: '100%' }}>
-        {/* Brand Logo */}
-        <a 
-          href="#hero" 
-          onClick={() => setMobileMenuOpen(false)}
-          style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <span 
-              style={{ 
-                fontFamily: 'LogoFont',
-                fontSize: isScrolled ? '1.8rem' : '2.6rem',
-                lineHeight: 1,
-                fontWeight: 'normal',
-                color: 'var(--color-text-primary)',
-                letterSpacing: '-0.02em',
-                textTransform: 'none',
-                transition: 'font-size var(--transition-normal)'
-              }}
-            >
-              flowify.agency
-            </span>
-            <div
-              style={{
-                maxHeight: isScrolled ? 0 : '20px',
-                opacity: isScrolled ? 0 : 1,
-                overflow: 'hidden',
-                transition: 'max-height var(--transition-normal), opacity var(--transition-normal)',
-                display: 'flex',
-                flexDirection: 'column'
-              }}
-            >
-              <span 
-                style={{ 
-                  fontFamily: 'var(--font-heading-mono)', 
-                  fontSize: '0.48rem', 
-                  fontWeight: 700, 
-                  letterSpacing: '0.04em', 
-                  color: 'var(--color-text-secondary)', 
-                  marginTop: '4px',
-                  textTransform: 'uppercase'
-                }}
-              >
-                AUTOMATE YOUR DAILY OPERATIONS
-              </span>
-            </div>
-          </div>
-        </a>
-
-        {/* Desktop Navigation Link Track */}
-        <nav className="desktop-links" style={{ display: 'flex', gap: 'var(--space-5)', alignItems: 'center' }}>
-          {navLinks.map((link) => {
-            return (
-              <a 
-                key={link.name} 
-                href={link.anchor}
-                className="nav-anchor"
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: 'var(--font-size-sm)',
-                  fontWeight: 700,
-                  color: 'var(--color-text-secondary)',
-                  transition: 'color var(--transition-fast)',
-                  padding: '4px 8px'
-                }}
-              >
-                {link.name}
-              </a>
-            );
-          })}
-        </nav>
-
-        {/* Global Controls & Call to Action */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-          {/* Light/Dark Toggle */}
-          <button 
-            onClick={toggleTheme}
-            aria-label="Toggle visual theme"
-            className="theme-switch"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              width: '38px',
-              height: '38px',
-              border: '1px solid var(--color-border)',
-              backgroundColor: 'var(--color-surface)',
-              transition: 'border-color var(--transition-fast)'
-            }}
-          >
-            {theme === 'light' ? (
-              <Moon size={16} strokeWidth={2.5} style={{ color: 'var(--color-text-primary)' }} />
-            ) : (
-              <Sun size={16} strokeWidth={2.5} style={{ color: 'var(--color-text-primary)' }} />
-            )}
-          </button>
-
-          {/* Book Audit Direct Trigger */}
-          <button 
-            onClick={onOpenAudit}
-            className="btn-core btn-secondary-action btn-sm-action desktop-only"
-            style={{ fontWeight: 700 }}
-          >
-            Free Operations Audit
-          </button>
-
-          {/* Mobile hamburger menu */}
-          <button 
-            className="mobile-hamburger"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '38px', height: '38px', border: '1px solid var(--color-border)', color: 'var(--color-text-primary)' }}
-          >
-            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Slide Drawer Navigation Overlay */}
-      {mobileMenuOpen && (
+      <header 
+        style={{
+          width: '100%',
+          border: '2px solid var(--color-text-primary)',
+          backgroundColor: 'color-mix(in srgb, var(--color-surface) 85%, transparent)',
+          backdropFilter: 'blur(16px)',
+          WebkitBackdropFilter: 'blur(16px)',
+          boxShadow: '6px 6px 0px var(--color-text-primary)',
+          borderRadius: 'var(--radius-sm)',
+          transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+        }}
+      >
         <div 
-          className="mobile-slide-drawer"
-          style={{
-            position: 'absolute',
-            top: isScrolled ? '64px' : '90px',
-            left: 0,
-            right: 0,
-            backgroundColor: 'var(--color-surface)',
-            borderBottom: '1px solid var(--color-border)',
-            boxShadow: 'var(--shadow-lg)',
-            padding: 'var(--space-5)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 'var(--space-4)',
-            zIndex: 999
+          style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            height: isScrolled ? '64px' : '76px',
+            paddingInline: 'var(--space-4)',
+            transition: 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
           }}
         >
-          {navLinks.map((link) => {
-            return (
-              <a 
-                key={link.name} 
-                href={link.anchor}
-                onClick={() => setMobileMenuOpen(false)}
-                style={{
-                  fontFamily: 'var(--font-heading)',
-                  fontSize: '1rem',
-                  fontWeight: 700,
-                  color: 'var(--color-text-primary)',
-                  borderBottom: '1px solid var(--color-border)',
-                  paddingBottom: '8px'
-                }}
-              >
-                {link.name}
-              </a>
-            );
-          })}
-          <button 
-            onClick={() => {
-              setMobileMenuOpen(false);
-              onOpenAudit();
-            }}
-            className="btn-core btn-primary-action"
-            style={{ width: '100%', marginTop: 'var(--space-2)' }}
+          {/* Brand Logo */}
+          <a 
+            href="#hero" 
+            onClick={() => setMobileMenuOpen(false)}
+            style={{ display: 'flex', alignItems: 'center' }}
           >
-            Free Operations Audit
-          </button>
+            <img 
+              src="/in-line-flowify.svg" 
+              alt="Flowify" 
+              style={{
+                height: isScrolled ? '24px' : '30px',
+                width: 'auto',
+                display: 'block',
+                transition: 'height 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+              }}
+            />
+          </a>
+
+          {/* Desktop Navigation Link Track */}
+          <nav className="desktop-links" style={{ display: 'flex', gap: 'var(--space-2)', alignItems: 'center' }}>
+            {navLinks.map((link) => {
+              return (
+                <a 
+                  key={link.name} 
+                  href={link.anchor}
+                  className="nav-anchor-brutal"
+                  style={{
+                    fontFamily: 'var(--font-heading-mono)',
+                    fontSize: '0.8rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    color: 'var(--color-text-secondary)',
+                    transition: 'all 0.15s ease',
+                    padding: '8px 12px',
+                    border: '1px solid transparent'
+                  }}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
+          </nav>
+
+          {/* Global Controls & Call to Action */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+            {/* Light/Dark Toggle */}
+            <button 
+              onClick={toggleTheme}
+              aria-label="Toggle visual theme"
+              className="theme-switch-brutal"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: '38px',
+                height: '38px',
+                border: '1px solid var(--color-text-primary)',
+                backgroundColor: 'var(--color-surface)',
+                boxShadow: '2px 2px 0px var(--color-text-primary)',
+                transition: 'all 0.15s ease',
+                cursor: 'pointer'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translate(-1px, -1px)';
+                e.currentTarget.style.boxShadow = '3px 3px 0px var(--color-text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = '2px 2px 0px var(--color-text-primary)';
+              }}
+            >
+              {theme === 'light' ? (
+                <Moon size={16} strokeWidth={2.5} style={{ color: 'var(--color-text-primary)' }} />
+              ) : (
+                <Sun size={16} strokeWidth={2.5} style={{ color: 'var(--color-text-primary)' }} />
+              )}
+            </button>
+
+            {/* Book Audit Direct Trigger */}
+            <button 
+              onClick={onOpenAudit}
+              className="btn-brutal-nav desktop-only"
+              style={{
+                fontFamily: 'var(--font-heading-mono)',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                backgroundColor: 'var(--color-accent)',
+                color: '#070709',
+                border: '2px solid var(--color-text-primary)',
+                boxShadow: '4px 4px 0px var(--color-text-primary)',
+                padding: '8px 16px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '6px 6px 0px var(--color-text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = '4px 4px 0px var(--color-text-primary)';
+              }}
+            >
+              Free Operations Audit
+            </button>
+
+            {/* Mobile hamburger menu */}
+            <button 
+              className="mobile-hamburger-brutal"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label="Toggle navigation menu"
+              style={{ 
+                display: 'flex', 
+                alignItems: 'center', 
+                justifyContent: 'center', 
+                width: '38px', 
+                height: '38px', 
+                border: '1px solid var(--color-text-primary)', 
+                color: 'var(--color-text-primary)',
+                boxShadow: '2px 2px 0px var(--color-text-primary)',
+                backgroundColor: 'var(--color-surface)',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translate(-1px, -1px)';
+                e.currentTarget.style.boxShadow = '3px 3px 0px var(--color-text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = '2px 2px 0px var(--color-text-primary)';
+              }}
+            >
+              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
-      )}
+
+        {/* Mobile Slide Drawer Navigation Overlay (Expanding inner container) */}
+        {mobileMenuOpen && (
+          <div 
+            className="mobile-slide-drawer-brutal"
+            style={{
+              borderTop: '2px solid var(--color-text-primary)',
+              padding: 'var(--space-4)',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: 'var(--space-3)',
+              backgroundColor: 'var(--color-surface)'
+            }}
+          >
+            {navLinks.map((link) => {
+              return (
+                <a 
+                  key={link.name} 
+                  href={link.anchor}
+                  onClick={() => setMobileMenuOpen(false)}
+                  style={{
+                    fontFamily: 'var(--font-heading-mono)',
+                    fontSize: '0.9rem',
+                    fontWeight: 700,
+                    textTransform: 'uppercase',
+                    color: 'var(--color-text-primary)',
+                    border: '1px solid var(--color-border)',
+                    padding: '12px var(--space-3)',
+                    backgroundColor: 'var(--color-bg)',
+                    transition: 'all 0.15s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-text-primary)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-surface-subtle)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--color-border)';
+                    e.currentTarget.style.backgroundColor = 'var(--color-bg)';
+                  }}
+                >
+                  {link.name}
+                </a>
+              );
+            })}
+            <button 
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenAudit();
+              }}
+              style={{
+                width: '100%',
+                marginTop: 'var(--space-2)',
+                fontFamily: 'var(--font-heading-mono)',
+                fontSize: '0.9rem',
+                fontWeight: 700,
+                textTransform: 'uppercase',
+                backgroundColor: 'var(--color-accent)',
+                color: '#070709',
+                border: '2px solid var(--color-text-primary)',
+                boxShadow: '4px 4px 0px var(--color-text-primary)',
+                padding: '12px 16px',
+                cursor: 'pointer',
+                transition: 'all 0.15s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translate(-2px, -2px)';
+                e.currentTarget.style.boxShadow = '6px 6px 0px var(--color-text-primary)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'none';
+                e.currentTarget.style.boxShadow = '4px 4px 0px var(--color-text-primary)';
+              }}
+            >
+              Free Operations Audit
+            </button>
+          </div>
+        )}
+      </header>
       
-      {/* Dynamic Styling injected natively */}
+      {/* Brutalist styling variables & hover definitions */}
       <style>{`
         .desktop-only { display: none; }
         @media (min-width: 768px) {
           .desktop-only { display: inline-flex; }
-          .mobile-hamburger { display: none !important; }
+          .mobile-hamburger-brutal { display: none !important; }
         }
         @media (max-width: 767px) {
           .desktop-links { display: none !important; }
         }
-        .nav-anchor:hover {
+        
+        /* Brutalist link hover effects */
+        .nav-anchor-brutal:hover {
           color: var(--color-text-primary) !important;
+          background-color: var(--color-surface-subtle);
+          border-color: var(--color-text-primary);
+          box-shadow: 2px 2px 0px var(--color-text-primary);
+          transform: translate(-1px, -1px);
         }
-        .theme-switch:hover {
-          border-color: var(--color-text-primary) !important;
-        }
-        .mobile-slide-drawer {
-          animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        
+        .mobile-slide-drawer-brutal {
+          animation: slideDownBrutal 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
           transform-origin: top;
         }
-        @keyframes slideDown {
+        
+        @keyframes slideDownBrutal {
           from {
             opacity: 0;
-            transform: translateY(-10px);
+            transform: translateY(-8px);
           }
           to {
             opacity: 1;
             transform: translateY(0);
           }
         }
+        
         @keyframes blink {
-          0%, 100% { opacity: 1; }
           50% { opacity: 0; }
         }
       `}</style>
-    </header>
+    </div>
   );
 };

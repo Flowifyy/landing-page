@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Play, Pause } from 'lucide-react';
+import SideRays from './animation/SideRays';
 
 export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
   const videoRef = useRef(null);
@@ -26,21 +27,50 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
   };
 
   return (
-    <section 
-      id="hero" 
+    <section
+      id="hero"
       style={{
         paddingTop: 'calc(var(--space-8) * 1.8)',
         paddingBottom: 'var(--space-8)',
         borderBottom: '1px solid var(--color-border)',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center'
       }}
     >
-      <div className="container">
+      {/* SideRays bottom-right animation */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          zIndex: 0, 
+          pointerEvents: 'none',
+          opacity: 0.7
+        }}
+      >
+        <SideRays
+          speed={2.5}
+          rayColor1="#047857"
+          rayColor2="#047857"
+          intensity={2.4}
+          spread={2}
+          origin="bottom-right"
+          tilt={60}
+          saturation={1.5}
+          blend={0.75}
+          falloff={2.3}
+          opacity={1.0}
+        />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         <div className="grid-layout">
           {/* Hero Left: Editorial Heading Copy */}
           <div className="fade-in-staged" style={{ animationDelay: '0.1s' }}>
-            
-            <h1 
+
+            <h1
               style={{
                 fontSize: 'var(--font-size-hero)',
                 lineHeight: 1.1,
@@ -57,7 +87,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
 
           {/* Hero Right: Premium Video Player */}
           <div className="fade-in-staged" style={{ animationDelay: '0.3s' }}>
-            <div 
+            <div
               className="card-premium"
               style={{
                 display: 'flex',
@@ -72,7 +102,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
               }}
             >
               {/* Window Header */}
-              <div 
+              <div
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -92,12 +122,12 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-warning)' }}></span>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }}></span>
                   </div>
-                  <span>flowily.mp4</span>
+                  <span>toolare.mp4</span>
                 </div>
               </div>
 
               {/* Video Wrapper */}
-              <div 
+              <div
                 style={{
                   position: 'relative',
                   width: '100%',
@@ -108,9 +138,9 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                 }}
                 onClick={togglePlay}
               >
-                <video 
+                <video
                   ref={videoRef}
-                  src="/home/hero-video.mp4"
+                  src="/video-asset/hero-wala-video.mp4"
                   playsInline
                   muted={false}
                   onEnded={() => setIsPlaying(false)}
@@ -122,7 +152,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                 />
 
                 {/* Overlays */}
-                <div 
+                <div
                   style={{
                     position: 'absolute',
                     inset: 0,
@@ -140,13 +170,13 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                   </div>
 
                   {/* Bottom Bar inside Video */}
-                  <div 
-                    style={{ 
-                      display: 'flex', 
-                      justifyContent: 'space-between', 
-                      alignItems: 'center', 
+                  <div
+                    style={{
+                      display: 'flex',
+                      justifyContent: 'space-between',
+                      alignItems: 'center',
                       pointerEvents: 'auto',
-                      width: '100%' 
+                      width: '100%'
                     }}
                   >
                     <button

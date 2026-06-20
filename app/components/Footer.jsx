@@ -62,10 +62,10 @@ export const Footer = () => {
               Engine Classes
             </h4>
             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '0.8rem' }}>
-              <li><a href="#engines" className="ft-lnk">Bespoke Applications</a></li>
-              <li><a href="#engines" className="ft-lnk">Intelligent Automations</a></li>
-              <li><a href="#engines" className="ft-lnk">Growth Marketing Grids</a></li>
-              <li><a href="#engines" className="ft-lnk">Local Social Engines</a></li>
+              <li><a href="#engines" className="ft-lnk">1. Attract</a></li>
+              <li><a href="#engines" className="ft-lnk">2. Convert</a></li>
+              <li><a href="#engines" className="ft-lnk">3. Deliver</a></li>
+              <li><a href="#engines" className="ft-lnk">4. Retain</a></li>
             </ul>
           </div>
 

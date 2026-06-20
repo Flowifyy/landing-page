@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/thilakshivenarayan/Desktop/flowily/landing-page/app/components/SideRays.css"],"sourcesContent":[".side-rays-container {\n  width: 100%;\n  height: 100%;\n  position: relative;\n  pointer-events: none;\n  z-index: 3;\n  overflow: hidden;\n}\n"],"names":[],"mappings":"AAAA"}},
+    {"offset": {"line": 11, "column": 0}, "map": {"version":3,"sources":["file:///Users/thilakshivenarayan/Desktop/flowily/landing-page/app/components/Strands.css"],"sourcesContent":[".strands-container {\n  position: relative;\n  width: 100%;\n  height: 100%;\n  background: transparent;\n}\n\n.strands-container canvas {\n  display: block;\n  width: 100%;\n  height: 100%;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA"}}]
+}

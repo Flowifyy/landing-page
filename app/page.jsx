@@ -3,17 +3,12 @@
 import { useState } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
-import { PaymentWorkflow } from './components/PaymentWorkflow';
-import { LogoMarquee } from './components/LogoMarquee';
-import { FrictionFlow } from './components/FrictionFlow';
+import { WorkflowSection } from './components/WorkflowSection';
 import { Services } from './components/Services';
-import { Process } from './components/Process';
-import { VideoReviews } from './components/VideoReviews';
-import { Calculator } from './components/Calculator';
-import { SpecBuilder } from './components/SpecBuilder';
+import { WhatWeDoSection } from './components/WhatWeDoSection';
+import { PhilosophySection } from './components/PhilosophySection';
 import { Footer } from './components/Footer';
 import { AuditDialog } from './components/AuditDialog';
-import { RevealSection } from './components/RevealSection';
 
 export default function Home() {
   const [isAuditOpen, setIsAuditOpen] = useState(false);
@@ -44,19 +39,6 @@ export default function Home() {
     );
   };
 
-  // Submit Spec Builder Form
-  const handleSpecSubmit = (name, email, modules, bottleneck) => {
-    alert(
-      `SYSTEM SPECIFICATION COMPILED & DEPLOYED\n` +
-      `---------------------------------------\n` +
-      `Config Subject: ${name}\n` +
-      `Business Node: ${email}\n` +
-      `Modules Selected:\n- ${modules.join('\n- ')}\n\n` +
-      `Bottleneck Description: "${bottleneck}"\n\n` +
-      `STATUS: SPEC DEPLOYED. Our workflow architects will review your schematic selections and deliver a custom blueprint configuration within 12 hours.`
-    );
-  };
-
   return (
     <div 
       style={{
@@ -76,44 +58,20 @@ export default function Home() {
         {/* Hero Section containing the Automation Cockpit */}
         <Hero onOpenAudit={() => handleOpenAudit()} />
 
-        {/* Integration partners infinite scrolling marquee */}
-        <LogoMarquee />
+        {/* Workflow Section */}
+        <WorkflowSection />
 
-        {/* Payment Workflow Automation Section */}
-        <RevealSection>
-          <PaymentWorkflow />
-        </RevealSection>
+        {/* What We Do Services Accordion */}
+        <Services />
 
-        {/* Friction versus Flow side-by-side card blocks */}
-        <RevealSection>
-          <FrictionFlow />
-        </RevealSection>
+        {/* What We Do Mission & Features Section */}
+        <WhatWeDoSection />
 
-        {/* Services engines cards */}
-        <RevealSection delay={0.05}>
-          <Services />
-        </RevealSection>
+        {/* Philosophy Section */}
+        <PhilosophySection />
 
-        {/* Autoplay on scroll high-trust Video reviews grid */}
-        <RevealSection delay={0.05}>
-          <VideoReviews />
-        </RevealSection>
-
-        {/* Systems diagnostics process timeline */}
-        <RevealSection delay={0.05}>
-          <Process />
-        </RevealSection>
-
-        {/* Revenue Leak calculator and SVG circular gauge */}
-        <RevealSection delay={0.05}>
-          <Calculator onOpenAudit={handleOpenAudit} />
-        </RevealSection>
-
-        {/* Interactive custom systems configurator form */}
-        <RevealSection delay={0.05}>
-          <SpecBuilder onSubmitInquiry={handleSpecSubmit} />
-        </RevealSection>
       </main>
+
 
       {/* System specifications footer */}
       <Footer />

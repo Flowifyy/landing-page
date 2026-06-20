@@ -1,221 +1,579 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import { useReveal } from '../hooks/useReveal';
 
 const engines = [
   {
+    id: 'attract',
     num: '01',
-    title: 'Real-Time Stock Syncing',
-    desc: 'Connect your Shopify store, Amazon/Myntra listings, and warehouse databases to sync stock counts down to the second. Stop losing money on stockouts, manual spreadsheet edits, and refunds for out-of-stock items.',
-    stack: 'Shopify Admin API / Amazon SP-API / Myntra API / PostgreSQL / Node.js'
+    title: 'Attract',
+    subtitle: 'Goal: Get attention',
+    description: 'How people discover your business.',
+    color: 'color-mix(in srgb, var(--color-accent) 45%, white 55%)', // Step 1: Lightest Green
+    features: [
+      'Instagram',
+      'Facebook Ads',
+      'Google Search',
+      'YouTube',
+      'Referrals',
+      'SEO',
+      'Word of mouth'
+    ]
   },
   {
+    id: 'convert',
     num: '02',
-    title: 'Automated Shipping & Dispatch',
-    desc: 'Auto-assign courier partners dynamically based on pricing, speed, or zone. Generate bulk shipping labels instantly, print invoice slips, and auto-dispatch tracking status updates to customers without manual operations.',
-    stack: 'Shiprocket API / Delhivery API / Bluedart API / WhatsApp Business API / Make.com'
+    title: 'Convert',
+    subtitle: 'Goal: Get them to take action',
+    description: 'Turn visitors into leads or customers.',
+    color: 'var(--color-accent)', // Step 2: Medium/A little dark Green
+    features: [
+      'Website',
+      'Landing page',
+      'Online store',
+      'Contact form',
+      'WhatsApp chat',
+      'Booking system'
+    ]
   },
   {
+    id: 'deliver',
     num: '03',
-    title: 'WhatsApp AI Support Bots',
-    desc: 'Deflect over 70% of customer support queries automatically. Our AI bots connect directly to Shopify to resolve "Where is my order?" (WISMO) requests, handle returns, process exchanges, and check refund statuses 24/7.',
-    stack: 'Shopify Admin API / WhatsApp Cloud API / OpenAI API / Custom Webhooks'
+    title: 'Deliver',
+    subtitle: 'Goal: Create a great customer experience',
+    description: 'Provide the product or service.',
+    color: 'color-mix(in srgb, var(--color-accent) 75%, black 25%)', // Step 3: More dark Green
+    features: [
+      'Restaurant serves food',
+      'E-commerce ships products',
+      'Agency delivers work',
+      'Salon provides service'
+    ]
   },
   {
+    id: 'retain',
     num: '04',
-    title: 'Cart Recovery & Upsell Flows',
-    desc: 'Recover dropped sales on autopilot. Trigger intelligent WhatsApp sequences for abandoned baskets and checkout payment failures, and gather automated post-delivery reviews to scale customer lifetime value.',
-    stack: 'Shopify Checkout Webhooks / WhatsApp Business API / Razorpay API / Zapier / Make'
+    title: 'Retain',
+    subtitle: 'Goal: Turn customers into repeat customers',
+    description: 'Bring customers back.',
+    color: 'color-mix(in srgb, var(--color-accent) 50%, black 50%)', // Step 4: Darkest Green
+    features: [
+      'WhatsApp updates',
+      'Email marketing',
+      'Loyalty programs',
+      'Discounts',
+      'Follow-up messages',
+      'Memberships'
+    ]
   }
 ];
 
-const engineBorderColors = ['#F59E0B', '#10B981', '#EF4444', '#0A84FF'];
-
 export const Services = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [revealRef, isVisible] = useReveal(0.1);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(1200);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        setContainerWidth(entry.contentRect.width);
+      }
+    });
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
+  const getPanelCenters = () => {
+    const W = containerWidth;
+    const G = 24; // var(--space-4) gap
+    const P_total = W - 3 * G;
+    const U = P_total / 5.8;
+    const W_inactive = U;
+    const W_active = 2.8 * U;
+    const W_equal = P_total / 4;
+
+    const calculatedCenters = [];
+    let currentLeft = 0;
+    for (let i = 0; i < 4; i++) {
+      const width = activeIndex === null ? W_equal : (i === activeIndex ? W_active : W_inactive);
+      calculatedCenters.push(currentLeft + width / 2);
+      currentLeft += width + G;
+    }
+    return calculatedCenters;
+  };
+
+  const centers = getPanelCenters();
+  const activeColor = activeIndex !== null ? engines[activeIndex].color : 'var(--color-border-high)';
 
   return (
-    <section id="engines" style={{ borderBottom: '1px solid var(--color-border)', paddingBlock: 'var(--space-8)' }}>
-      <div className="container">
-        <div className="services-container-grid">
-          {/* Left Sticky Pane */}
-          <div className="services-sticky-header">
-            <h2 
-              style={{
-                fontSize: 'var(--font-size-h2)',
-                letterSpacing: '-0.03em',
-                lineHeight: 1.15,
-                marginBottom: 'var(--space-3)'
-              }}
-            >
-              Four ways we automate your <span className="editorial-serif" style={{ color: 'var(--color-accent)' }}>e-commerce bottlenecks</span>.
-            </h2>
-            <p style={{ fontSize: 'var(--font-size-sm)', color: 'var(--color-text-secondary)', lineHeight: 1.6, maxWidth: '440px' }}>
-              We build custom, self-running API integrations that align your front-end store, support channels, and warehouse logistics. Hover over each setup below to see what it handles.
-            </p>
-          </div>
-          
-          {/* Right Pane: Wide Interactive Strip Accordion */}
-          <div className="services-stack">
-            {engines.map((engine, index) => {
-              const isHovered = hoveredIndex === index;
-              const isAnyHovered = hoveredIndex !== null;
-              const activeColor = engineBorderColors[index];
+    <section
+      id="engines"
+      ref={revealRef}
+      className={`reveal ${isVisible ? 'visible' : ''}`}
+      style={{
+        paddingTop: 'calc(var(--space-8) * 1.5)',
+        paddingBottom: 'calc(var(--space-8) * 1.5)',
+        borderBottom: '1px solid var(--color-border)',
+        overflow: 'hidden',
+        backgroundColor: 'var(--color-bg)'
+      }}
+    >
+      <div 
+        className="container" 
+        ref={containerRef}
+        onMouseLeave={() => setActiveIndex(null)}
+      >
+        
+        {/* Section Heading */}
+        <div style={{ maxWidth: '820px', marginBottom: 'var(--space-6)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+          <span className="section-tag" style={{ marginBottom: 'var(--space-3)' }}>
+            What We Do
+          </span>
+          <h2
+            style={{
+              fontSize: 'var(--font-size-h2)',
+              lineHeight: 1.15,
+              letterSpacing: '-0.03em',
+              marginBottom: 'var(--space-4)',
+              color: 'var(--color-text-primary)'
+            }}
+          >
+            Core <span className="editorial-serif" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-heading-serif)' }}> Concept</span>
+          </h2>
+          <div style={{ width: '64px', height: '2px', backgroundColor: 'var(--color-accent)', marginBottom: 'var(--space-4)' }} />
+        </div>
 
-              return (
-                <div 
-                  key={engine.num} 
-                  className={`engine-strip ${isHovered ? 'active' : ''}`}
-                  onMouseEnter={() => setHoveredIndex(index)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  style={{
-                    opacity: isAnyHovered && !isHovered ? 0.35 : 1,
-                    transform: isHovered ? 'scale(1.01) translateY(-2px)' : 'none',
-                    borderColor: isHovered ? activeColor : 'var(--color-border)',
-                    boxShadow: isHovered ? `0 12px 32px rgba(0, 0, 0, 0.2), inset 4px 0 0 ${activeColor}` : 'none'
-                  }}
-                >
-                  <div className="engine-strip-top">
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
+        {/* Dynamic Accordion Chassis */}
+        <div className="services-flex-container">
+          {engines.map((engine, idx) => {
+            const isActive = idx === activeIndex;
+            return (
+              <div
+                key={engine.id}
+                onMouseEnter={() => setActiveIndex(idx)}
+                onClick={() => setActiveIndex(idx)}
+                className={`service-panel ${isActive ? 'active' : ''}`}
+                style={{
+                  borderColor: isActive ? engine.color : 'var(--color-border)',
+                  boxShadow: isActive ? `8px 8px 0px ${engine.color}` : 'none'
+                }}
+              >
+                {/* Active Column Layout (Visible on desktop when active, always on mobile if active) */}
+                <div className="active-content">
+                  <div>
+                    {/* Header Row */}
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 'var(--space-4)' }}>
                       <span 
-                        className="engine-index"
-                        style={{
-                          color: isHovered ? activeColor : 'var(--color-text-muted)',
+                        style={{ 
+                          fontFamily: 'var(--font-heading-mono)', 
+                          fontSize: '1rem', 
+                          fontWeight: 700, 
+                          color: engine.color 
                         }}
                       >
                         {engine.num}
                       </span>
-                      <h3 className="engine-title">{engine.title}</h3>
+                      <div 
+                        style={{ 
+                          width: '12px', 
+                          height: '12px', 
+                          borderRadius: '50%', 
+                          backgroundColor: engine.color 
+                        }} 
+                      />
                     </div>
-                    <div className="engine-indicator-arrow" style={{ transform: isHovered ? 'rotate(45deg)' : 'none', color: isHovered ? activeColor : 'var(--color-text-muted)' }}>
-                      →
-                    </div>
+
+                    {/* Titles */}
+                    <h3 
+                      style={{ 
+                        fontSize: 'var(--font-size-h3)', 
+                        fontWeight: 800, 
+                        color: 'var(--color-text-primary)',
+                        marginBottom: '8px'
+                      }}
+                    >
+                      {engine.title}
+                    </h3>
+                    <h4 
+                      style={{ 
+                        fontSize: 'var(--font-size-sm)', 
+                        fontFamily: 'var(--font-heading-mono)',
+                        fontWeight: 600, 
+                        color: engine.color,
+                        marginBottom: 'var(--space-3)',
+                        textTransform: 'uppercase',
+                        letterSpacing: '0.02em'
+                      }}
+                    >
+                      {engine.subtitle}
+                    </h4>
+
+                    {/* Description */}
+                    <p style={{ fontSize: 'var(--font-size-body)', marginBottom: 'var(--space-4)', color: 'var(--color-text-secondary)' }}>
+                      {engine.description}
+                    </p>
+
+                    {/* Features List */}
+                    <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: 'var(--space-4)' }}>
+                      {engine.features.map((feat) => (
+                        <li key={feat} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'var(--font-size-sm)', color: 'var(--color-text-primary)' }}>
+                          <CheckCircle2 size={16} style={{ color: engine.color, flexShrink: 0 }} />
+                          <span>{feat}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
-                  <div className="engine-strip-body" style={{ maxHeight: isHovered ? '600px' : '0px' }}>
-                    <div className="engine-strip-content">
-                      <p className="engine-desc">{engine.desc}</p>
-                      <div className="engine-stack-wrapper">
-                        <span className="engine-stack-label" style={{ color: activeColor }}>WHAT WE USE:</span>
-                        <p className="engine-stack-tech">{engine.stack}</p>
-                      </div>
-                    </div>
-                  </div>
+                  {/* Call to Action Inside Panel */}
+                  <a 
+                    href="#build-spec"
+                    className="btn-core"
+                    style={{
+                      border: `1.5px solid ${engine.color}`,
+                      color: 'var(--color-text-primary)',
+                      alignSelf: 'flex-start',
+                      gap: '8px',
+                      fontSize: '0.75rem',
+                      padding: '8px 16px',
+                      marginTop: 'auto'
+                    }}
+                  >
+                    Deploy Engine <ArrowRight size={14} style={{ color: engine.color }} />
+                  </a>
                 </div>
+
+                {/* Inactive Panel Layout (Only shown on Desktop when inactive) */}
+                <div className="inactive-content">
+                  <span 
+                    style={{ 
+                      fontFamily: 'var(--font-heading-mono)', 
+                      fontSize: '1.2rem', 
+                      fontWeight: 700, 
+                      color: 'var(--color-text-muted)' 
+                    }}
+                  >
+                    {engine.num}
+                  </span>
+                  
+                  {/* Vertical rotated text */}
+                  <span 
+                    className="vertical-title-text"
+                    style={{
+                      fontFamily: 'var(--font-heading)',
+                      fontSize: '1.1rem',
+                      fontWeight: 800,
+                      color: 'var(--color-text-secondary)',
+                      whiteSpace: 'nowrap',
+                      letterSpacing: '-0.02em',
+                      writingMode: 'vertical-rl',
+                      transform: 'rotate(180deg)',
+                      marginBlock: 'auto'
+                    }}
+                  >
+                    {engine.title}
+                  </span>
+
+                  <div 
+                    style={{ 
+                      width: '8px', 
+                      height: '8px', 
+                      borderRadius: '50%', 
+                      backgroundColor: 'var(--color-border-hover)' 
+                    }} 
+                  />
+                </div>
+
+              </div>
+            );
+          })}
+        </div>
+
+        {/* SVG Pipeline Diagram */}
+        <div className="pipeline-container" style={{ width: '100%', marginTop: 'var(--space-4)', position: 'relative' }}>
+          <svg 
+            width={containerWidth} 
+            height={130} 
+            viewBox={`0 0 ${containerWidth} 130`}
+            style={{ display: 'block', overflow: 'visible' }}
+          >
+            <defs>
+              <marker
+                id="arrow-head"
+                viewBox="0 0 10 10"
+                refX="6"
+                refY="5"
+                markerWidth="6"
+                markerHeight="6"
+                orient="auto"
+              >
+                <path d="M 0 2 Q 4 5 0 8 L 8 5 Z" fill={activeColor} style={{ transition: 'fill 0.35s ease' }} />
+              </marker>
+            </defs>
+
+            {/* Connecting Pipes */}
+            {engines.map((engine, idx) => {
+              const isPathActive = idx === activeIndex;
+              const xStart = centers[idx] || 0;
+              const xEnd = containerWidth / 2;
+              const yStart = 0;
+              const yEnd = 85;
+
+              // Cubic Bezier curve path
+              const pathD = `M ${xStart} ${yStart} C ${xStart} ${yEnd / 2}, ${xEnd} ${yEnd / 2}, ${xEnd} ${yEnd}`;
+
+              return (
+                <path
+                  key={engine.id}
+                  d={pathD}
+                  fill="none"
+                  stroke={engine.color}
+                  strokeWidth={isPathActive ? 4.5 : 2.5}
+                  opacity={isPathActive ? 1 : 0.6}
+                  style={{
+                    transition: 'd 0.35s cubic-bezier(0.16, 1, 0.3, 1), stroke-width 0.35s ease, opacity 0.35s ease'
+                  }}
+                />
               );
             })}
+
+            {/* Relay Node */}
+            <circle 
+              cx={containerWidth / 2} 
+              cy={85} 
+              r={5.5} 
+              fill={activeColor} 
+              stroke="var(--color-bg)" 
+              strokeWidth={2}
+              style={{ transition: 'fill 0.35s ease' }}
+            />
+
+            {/* Main output pipeline stream going downwards */}
+            <path 
+              d={`M ${containerWidth / 2} 85 L ${containerWidth / 2} 120`} 
+              fill="none"
+              stroke={activeColor}
+              strokeWidth={3.5}
+              markerEnd="url(#arrow-head)"
+              style={{ transition: 'stroke 0.35s ease' }}
+            />
+          </svg>
+
+          {/* Goal Callout Box */}
+          <div 
+            style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center', 
+              marginTop: '12px' 
+            }}
+          >
+            <div 
+              style={{
+                fontFamily: 'var(--font-heading-mono)',
+                fontSize: '0.9rem',
+                fontWeight: 700,
+                color: 'var(--color-text-primary)',
+                textTransform: 'uppercase',
+                letterSpacing: '0.04em',
+                transition: 'border-color 0.35s ease, box-shadow 0.35s ease',
+                textAlign: 'center',
+                backgroundColor: 'var(--color-surface)',
+                border: `2px solid ${activeColor}`,
+                boxShadow: `6px 6px 0px ${activeColor}`,
+                padding: '12px 24px',
+                borderRadius: 'var(--radius-sm)',
+                display: 'inline-block'
+              }}
+            >
+              The flow that every crore company has used
+            </div>
+
+            {/* Real-time Contextual Message */}
+            <p
+              style={{
+                marginTop: '16px',
+                fontSize: 'var(--font-size-body)',
+                color: 'var(--color-text-secondary)',
+                fontFamily: 'var(--font-body)',
+                textAlign: 'center',
+                maxWidth: '520px',
+                lineHeight: 'var(--line-height-body)',
+                transition: 'color 0.35s ease',
+                fontStyle: 'italic'
+              }}
+            >
+              Right now yourself in the convert section. As yourself watching you can be the potential lead for our agency.(Wanna be 😏?)
+            </p>
+
+            {/* Click to Contact Mailto Link */}
+            <a
+              href="mailto:hello@flowify.agency?subject=Operational Inquiry"
+              className="underline underline-offset-4"
+              style={{
+                marginTop: '12px',
+                transition: 'color 0.35s ease',
+                fontWeight: 600,
+                textDecoration: 'underline',
+                textUnderlineOffset: '4px'
+              }}
+            >
+              Click to contact
+            </a>
           </div>
         </div>
+
       </div>
 
+      {/* Embedded styling for desktop vertical accordion and responsive collapse */}
       <style>{`
-        .services-container-grid {
-          display: grid;
-          grid-template-columns: 1fr;
-          gap: var(--space-6);
-          align-items: start;
-        }
-
-        .services-sticky-header {
-          position: relative;
-        }
-
-        .services-stack {
+        .services-flex-container {
           display: flex;
-          flex-direction: column;
-          gap: var(--space-3);
-        }
-
-        .engine-strip {
-          background-color: var(--color-surface);
-          border: 1px solid var(--color-border);
-          border-radius: var(--radius-md);
-          padding: var(--space-4) var(--space-5);
-          transition: all var(--transition-normal);
-          cursor: pointer;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-        }
-
-        .engine-strip-top {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          width: 100%;
-        }
-
-        .engine-index {
-          font-family: var(--font-heading-mono);
-          font-weight: 700;
-          font-size: 0.85rem;
-          transition: color var(--transition-normal);
-        }
-
-        .engine-title {
-          font-family: var(--font-heading);
-          font-size: clamp(1.1rem, 1rem + 1vw, 1.4rem);
-          font-weight: 700;
-          letter-spacing: -0.02em;
-          margin: 0;
-        }
-
-        .engine-indicator-arrow {
-          font-family: var(--font-heading-mono);
-          font-size: 1.2rem;
-          transition: all var(--transition-normal);
-        }
-
-        .engine-strip-body {
-          transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-          overflow: hidden;
-        }
-
-        .engine-strip-content {
-          padding-top: var(--space-4);
-          display: flex;
-          flex-direction: column;
           gap: var(--space-4);
+          width: 100%;
+          min-height: 540px;
+          align-items: stretch;
         }
 
-        .engine-desc {
-          font-size: 0.88rem;
-          line-height: 1.6;
-          color: var(--color-text-secondary);
-          margin: 0;
+        .service-panel {
+          position: relative;
+          overflow: hidden;
+          flex: 1;
+          transition: flex 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+                      border-color 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                      box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                      background-color 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+          cursor: pointer;
+          min-width: 0;
+          background-color: var(--color-surface);
+          border-width: 2px;
+          border-style: solid;
+          border-color: var(--color-border);
+          border-radius: var(--radius-sm);
         }
 
-        .engine-stack-wrapper {
-          border-top: 1px solid var(--color-border);
-          padding-top: var(--space-3);
+        .service-panel.active {
+          flex: 2.8;
+          cursor: default;
+        }
+
+        /* Desktop specific content layout with smooth transitions */
+        .service-panel .active-content {
+          position: absolute;
+          top: var(--space-5);
+          left: var(--space-5);
+          right: var(--space-5);
+          bottom: var(--space-5);
           display: flex;
           flex-direction: column;
-          gap: var(--space-1);
+          justify-content: space-between;
+          opacity: 0;
+          transform: translateY(12px);
+          transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
+                      transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+                      visibility 0.25s;
+          visibility: hidden;
+          pointer-events: none;
+          width: calc(100% - 48px);
+          height: calc(100% - 48px);
         }
 
-        .engine-stack-label {
-          font-family: var(--font-heading-mono);
-          font-size: 0.6rem;
-          font-weight: 700;
-          letter-spacing: 0.05em;
+        .service-panel.active .active-content {
+          opacity: 1;
+          transform: translateY(0);
+          visibility: visible;
+          pointer-events: auto;
+          transition-delay: 0.1s; /*snappy, less delay*/
         }
 
-        .engine-stack-tech {
-          font-family: var(--font-heading-mono);
-          font-size: 0.75rem;
-          color: var(--color-text-muted);
-          margin: 0;
+        .service-panel .inactive-content {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: space-between;
+          padding-block: var(--space-5);
+          opacity: 1;
+          transform: scale(1);
+          transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                      transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+                      visibility 0.2s;
+          visibility: visible;
+          pointer-events: auto;
         }
 
-        @media (min-width: 860px) {
-          .services-container-grid {
-            grid-template-columns: 4.5fr 5.5fr;
-            gap: var(--space-7);
+        .service-panel.active .inactive-content {
+          opacity: 0;
+          transform: scale(0.92);
+          visibility: hidden;
+          pointer-events: none;
+        }
+
+        .service-panel:hover:not(.active) {
+          border-color: var(--color-border-high);
+          background-color: var(--color-surface-subtle);
+        }
+
+        /* Mobile Responsive Overrides */
+        @media (max-width: 767px) {
+          .services-flex-container {
+            flex-direction: column;
+            min-height: auto;
+            gap: var(--space-3);
           }
 
-          .services-sticky-header {
-            position: sticky;
-            top: 120px;
+          .service-panel {
+            width: 100% !important;
+            height: auto !important;
+            flex: none !important;
+            padding: var(--space-4) !important;
+            transition: border-color var(--transition-normal), 
+                        box-shadow var(--transition-normal),
+                        background-color var(--transition-normal) !important;
+          }
+
+          .service-panel .active-content {
+            position: relative !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
+            display: flex !important;
+            width: 100% !important;
+            height: auto !important;
+          }
+
+          .service-panel .inactive-content {
+            display: none !important;
+          }
+          
+          /* For mobile, simplify accordion by showing headings and expanding details on click */
+          .service-panel:not(.active) .active-content ul,
+          .service-panel:not(.active) .active-content p,
+          .service-panel:not(.active) .active-content a {
+            display: none !important;
+          }
+          
+          .service-panel:not(.active) {
+            box-shadow: none !important;
+            border-color: var(--color-border) !important;
+          }
+        }
+
+        .pipeline-container {
+          display: block;
+        }
+        @media (max-width: 767px) {
+          .pipeline-container {
+            display: none !important;
           }
         }
       `}</style>

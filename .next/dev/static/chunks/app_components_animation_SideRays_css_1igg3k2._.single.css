@@ -1,0 +1,11 @@
+/* [project]/app/components/animation/SideRays.css [app-client] (css) */
+.side-rays-container {
+  pointer-events: none;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/*# sourceMappingURL=app_components_animation_SideRays_css_1igg3k2._.single.css.map*/
