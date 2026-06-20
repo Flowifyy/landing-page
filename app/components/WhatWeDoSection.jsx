@@ -11,46 +11,46 @@ export const WhatWeDoSection = () => {
   const steps = [
     {
       index: "01",
-      title: "ATTRACT",
-      summary: "Get discovered through websites, SEO, and marketing.",
+      title: "OBSERVE",
+      summary: "We see how you operate in real-time.",
       details: [
-        "High-performance custom web development",
-        "Search Engine Optimization (SEO) campaigns",
-        "Local search and Google Map optimization",
-        "Targeted customer acquisition ads"
+        "On-site & remote shadowing of team actions",
+        "Full audit of software, spreadsheets & manual steps",
+        "Identification of costly friction points",
+        "Operational bottleneck mapping"
       ]
     },
     {
       index: "02",
-      title: "CONVERT",
-      summary: "Turn visitors into paying customers.",
+      title: "UNDERSTAND",
+      summary: "We analyze operations and current workflows.",
       details: [
-        "High-converting landing pages",
-        "Automated booking & scheduling forms",
-        "WhatsApp chat flows & query routing",
-        "Interactive instant estimation engines"
+        "Deep-dive analysis of information handoffs",
+        "Detailed documentation of queue structures",
+        "Quantifying time & money lost to manual loops",
+        "Root-cause identification of delays"
       ]
     },
     {
       index: "03",
-      title: "AUTOMATE",
-      summary: "Remove repetitive work with smart workflows.",
+      title: "COLLABORATE",
+      summary: "Joint design meetings to plan improvements.",
       details: [
-        "Automated invoicing & billing dispatches",
-        "Real-time sync between apps and databases",
-        "Auto-generated PDF document pipelines",
-        "Real-time notifications and alerts"
+        "Interactive team alignment workshops",
+        "Collaborative design of custom software relays",
+        "Review of automation blueprints",
+        "Setting target energy & margin metrics"
       ]
     },
     {
       index: "04",
-      title: "SCALE",
-      summary: "Handle more customers without increasing complexity.",
+      title: "IMPLEMENT",
+      summary: "Deploy new workflow with new tools, energy, and margins.",
       details: [
-        "Legacy accounting integration (Tally Sync)",
-        "Automated customer retention messaging",
-        "Centralized CRM database infrastructure",
-        "Scalable operations running 24/7 on autopilot"
+        "Deployment of premium custom software & automations",
+        "Legacy database & API integration (Tally, CRM)",
+        "Comprehensive team training & onboarding",
+        "Immediate optimization of operating margins"
       ]
     }
   ];
@@ -113,17 +113,18 @@ export const WhatWeDoSection = () => {
 
       <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         {/* Section Header */}
-        <div style={{ maxWidth: '880px', marginBottom: 'var(--space-6)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+        <div style={{ maxWidth: '880px', marginBottom: 'var(--space-7)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
           <span 
             className="section-tag" 
             style={{ 
               marginBottom: 'var(--space-3)', 
               fontFamily: 'var(--font-heading-mono)',
               letterSpacing: '0.12em',
-              fontSize: '0.75rem'
+              fontSize: '0.75rem',
+              color: 'var(--color-accent)'
             }}
           >
-            [ THE FLOWIFY METHODOLOGY ]
+            [ HOW WE HELP YOUR BUSINESS ]
           </span>
           <h2
             style={{
@@ -131,24 +132,24 @@ export const WhatWeDoSection = () => {
               lineHeight: 1.15,
               letterSpacing: '-0.04em',
               marginBottom: 'var(--space-4)',
-              color: 'var(--color-text-primary)',
+              color: '#FFFFFF',
               fontWeight: 800
             }}
           >
-            Systems that help your business grow without{" "}
-            <span className="editorial-serif" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-heading-serif)' }}>
-              extra work.
+            A collaborative process built to increase your{" "}
+            <span className="editorial-serif" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-heading-serif)', background: 'linear-gradient(to right, #10B981, #34D399)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
+              operating margins.
             </span>
           </h2>
           <p
             style={{
-              fontSize: '1.15rem',
+              fontSize: '1.2rem',
               lineHeight: '1.6',
               color: 'var(--color-text-secondary)',
               maxWidth: '720px'
             }}
           >
-            We build websites, automations, and business systems that help you attract customers, streamline operations, and scale faster.
+            We study, analyze, and rebuild your business pipelines from the ground up to eliminate manual work and boost operational efficiency.
           </p>
         </div>
 
@@ -164,42 +165,41 @@ export const WhatWeDoSection = () => {
           {steps.map((step, idx) => (
             <div 
               key={idx}
-              className="methodology-card-brutal"
-              style={{
-                padding: 'var(--space-4) var(--space-5) var(--space-5) var(--space-5)',
-                border: '2px solid var(--color-text-primary)',
-                backgroundColor: 'var(--color-surface)',
-                boxShadow: '5px 5px 0px var(--color-text-primary)',
-                transition: 'all 0.15s ease',
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: 'var(--radius-sm)'
-              }}
+              className="methodology-card-premium"
             >
               {/* Card Index & Title */}
               <div 
                 style={{ 
-                  display: 'flex', 
-                  alignItems: 'baseline', 
-                  gap: '8px',
-                  marginBottom: 'var(--space-2)',
+                  display: 'inline-flex', 
+                  alignItems: 'center', 
+                  gap: '6px',
+                  marginBottom: 'var(--space-3)',
                   fontFamily: 'var(--font-heading-mono)',
-                  fontSize: '0.85rem',
-                  fontWeight: 700
+                  fontSize: '0.75rem',
+                  fontWeight: 700,
+                  backgroundColor: 'rgba(16, 185, 129, 0.08)',
+                  padding: '4px 10px',
+                  borderRadius: '20px',
+                  border: '1px solid rgba(16, 185, 129, 0.15)',
+                  alignSelf: 'start',
+                  position: 'relative',
+                  zIndex: 1
                 }}
               >
                 <span style={{ color: 'var(--color-accent)' }}>{step.index} /</span>
-                <span style={{ color: 'var(--color-text-primary)', letterSpacing: '0.05em' }}>{step.title}</span>
+                <span style={{ color: '#E4E4E7', letterSpacing: '0.05em' }}>{step.title}</span>
               </div>
 
               {/* Step Summary */}
               <h3 
                 style={{ 
-                  fontSize: '1.1rem', 
+                  fontSize: '1.2rem', 
                   fontWeight: 800, 
                   lineHeight: '1.3', 
-                  color: 'var(--color-text-primary)',
-                  marginBottom: 'var(--space-3)'
+                  color: '#FFFFFF',
+                  marginBottom: 'var(--space-4)',
+                  position: 'relative',
+                  zIndex: 1
                 }}
               >
                 {step.summary}
@@ -211,10 +211,12 @@ export const WhatWeDoSection = () => {
                   listStyle: 'none', 
                   display: 'flex', 
                   flexDirection: 'column', 
-                  gap: '8px', 
+                  gap: '12px', 
                   marginTop: 'auto',
-                  borderTop: '1px solid var(--color-border)',
-                  paddingTop: 'var(--space-3)'
+                  borderTop: '1px solid rgba(255, 255, 255, 0.08)',
+                  paddingTop: 'var(--space-4)',
+                  position: 'relative',
+                  zIndex: 1
                 }}
               >
                 {step.details.map((detail, dIdx) => (
@@ -223,13 +225,13 @@ export const WhatWeDoSection = () => {
                     style={{ 
                       display: 'flex', 
                       alignItems: 'start', 
-                      gap: '8px', 
-                      fontSize: '0.85rem', 
+                      gap: '10px', 
+                      fontSize: '0.875rem', 
                       color: 'var(--color-text-secondary)',
                       lineHeight: '1.4'
                     }}
                   >
-                    <CheckCircle2 size={14} style={{ color: 'var(--color-accent)', marginTop: '2px', flexShrink: 0 }} />
+                    <CheckCircle2 size={15} className="check-icon" style={{ color: 'var(--color-accent)', marginTop: '2px', flexShrink: 0 }} />
                     <span>{detail}</span>
                   </li>
                 ))}
@@ -240,12 +242,47 @@ export const WhatWeDoSection = () => {
       </div>
 
       <style>{`
-        .methodology-card-brutal {
-          transition: transform 0.15s ease, box-shadow 0.15s ease;
+        .methodology-card-premium {
+          padding: var(--space-5);
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          background-color: rgba(14, 14, 18, 0.45);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+          border-radius: 16px;
+          display: flex;
+          flex-direction: column;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          position: relative;
+          overflow: hidden;
         }
-        .methodology-card-brutal:hover {
-          transform: translate(-3px, -3px);
-          box-shadow: 8px 8px 0px var(--color-text-primary) !important;
+        .methodology-card-premium::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, transparent 100%);
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          pointer-events: none;
+          z-index: 0;
+        }
+        .methodology-card-premium:hover {
+          transform: translateY(-8px);
+          border-color: rgba(16, 185, 129, 0.4);
+          box-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15), 0 0 0 1px rgba(16, 185, 129, 0.1);
+        }
+        .methodology-card-premium:hover::before {
+          opacity: 1;
+        }
+        .methodology-card-premium:hover .check-icon {
+          transform: scale(1.15);
+          color: #34D399 !important;
+        }
+        .check-icon {
+          transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
         }
       `}</style>
     </section>
