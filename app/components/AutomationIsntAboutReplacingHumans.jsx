@@ -4,7 +4,7 @@ import React, { useState, useRef } from 'react';
 import { Play, Pause } from 'lucide-react';
 import { useReveal } from '../hooks/useReveal';
 
-export const PhilosophySection = () => {
+export const AutomationIsntAboutReplacingHumans = () => {
   const [revealRef, isVisible] = useReveal(0.1);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -109,7 +109,7 @@ export const PhilosophySection = () => {
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-warning)' }}></span>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }}></span>
                   </div>
-                  <span>automation-philosophy.mp4</span>
+                  <span>automation-isnt-about-replacing-humans.mp4</span>
                 </div>
               </div>
 

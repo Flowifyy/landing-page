@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
-import { useReveal } from '../hooks/useReveal';
+import { useReveal } from '../../hooks/useReveal';
 
 const engines = [
   {
@@ -70,7 +70,7 @@ const engines = [
   }
 ];
 
-export const Services = () => {
+export const WhoConcept = () => {
   const [revealRef, isVisible] = useReveal(0.1);
   const [activeIndex, setActiveIndex] = useState(null);
   const containerRef = useRef(null);
@@ -131,7 +131,7 @@ export const Services = () => {
         {/* Section Heading */}
         <div style={{ maxWidth: '820px', marginBottom: 'var(--space-6)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
           <span className="section-tag" style={{ marginBottom: 'var(--space-3)' }}>
-            What We Do
+             The flow that every crore company has used
           </span>
           <h2
             style={{

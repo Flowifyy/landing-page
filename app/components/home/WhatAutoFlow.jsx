@@ -2,9 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
-import { useReveal } from '../hooks/useReveal';
+import { useReveal } from '../../hooks/useReveal';
 
-export const WorkflowSection = () => {
+export const WhatAutoFlow = () => {
   const [revealRef, isVisible] = useReveal(0.1);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -87,7 +87,7 @@ export const WorkflowSection = () => {
     <section
       id="workflow-section"
       ref={revealRef}
-      className={`reveal ${isVisible ? 'visible' : ''}`}
+      className={`reveal ${isVisible ? 'visible' : ''} mobile-workflow-section`}
       style={{
         paddingTop: 'calc(var(--space-8) * 1.5)',
         paddingBottom: 'calc(var(--space-8) * 1.5)',
@@ -100,13 +100,14 @@ export const WorkflowSection = () => {
         <div className="grid-layout">
           {/* Video Player (Left on Desktop) */}
           <div
+            className="workflow-video-container"
             style={{
               width: '100%',
               margin: '0 auto',
             }}
           >
             <div
-              className="card-premium"
+              className="card-premium workflow-video-card"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -121,6 +122,7 @@ export const WorkflowSection = () => {
             >
               {/* Window Header */}
               <div
+                className="workflow-video-header"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -140,7 +142,7 @@ export const WorkflowSection = () => {
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-warning)' }}></span>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }}></span>
                   </div>
-                  <span>workflow-section-video.mp4</span>
+                  <span>what-Workflow.mp4</span>
                 </div>
               </div>
 
@@ -186,6 +188,7 @@ export const WorkflowSection = () => {
                     }}
                   >
                     <div
+                      className="big-play-btn"
                       style={{
                         width: '72px',
                         height: '72px',
@@ -209,7 +212,7 @@ export const WorkflowSection = () => {
 
                 {/* Custom Bottom Control Bar */}
                 <div
-                  className="video-controls-bar"
+                  className="video-controls-bar mobile-controls-bar"
                   style={{
                     position: 'absolute',
                     bottom: 0,
@@ -228,6 +231,7 @@ export const WorkflowSection = () => {
                 >
                   {/* Progress bar container */}
                   <div
+                    className="progress-bar-container"
                     style={{
                       height: '6px',
                       width: '100%',
@@ -302,7 +306,10 @@ export const WorkflowSection = () => {
           </div>
 
           {/* Heading Area (Right on Desktop) */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
+          <div 
+            className="workflow-text-container"
+            style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}
+          >
             <span className="section-tag" style={{ marginBottom: 'var(--space-3)' }}>
               Operational Engine
             </span>
@@ -342,6 +349,63 @@ export const WorkflowSection = () => {
       <style>{`
         .video-player-container:hover .video-controls-bar {
           opacity: 1 !important;
+        }
+        
+        @media (max-width: 767px) {
+          .mobile-workflow-section {
+            padding-top: var(--space-6) !important;
+            padding-bottom: var(--space-6) !important;
+          }
+          .workflow-text-container {
+            order: 1 !important;
+          }
+          .workflow-text-container h2 {
+            font-size: 2.2rem !important;
+          }
+          .workflow-video-container {
+            order: 2 !important;
+            width: calc(100% + (2 * var(--space-4))) !important;
+            margin-left: calc(-1 * var(--space-4)) !important;
+            margin-right: calc(-1 * var(--space-4)) !important;
+          }
+          .workflow-video-card {
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+            margin-top: var(--space-3) !important;
+          }
+          .workflow-video-header {
+            padding: var(--space-2) var(--space-2) !important;
+            font-size: 10px !important;
+            border-radius: 0px !important;
+          }
+          /* Big center play button smaller */
+          .big-play-btn {
+            width: 48px !important;
+            height: 48px !important;
+          }
+          .big-play-btn svg {
+            width: 18px !important;
+            height: 18px !important;
+            margin-left: 2px !important;
+          }
+          /* Bottom controls bar smaller */
+          .mobile-controls-bar {
+            padding: var(--space-2) !important;
+            gap: var(--space-1) !important;
+          }
+          .mobile-controls-bar button svg {
+            width: 14px !important;
+            height: 14px !important;
+          }
+          .mobile-controls-bar span {
+            font-size: 10px !important;
+          }
+          /* Progress bar container height */
+          .progress-bar-container {
+            height: 4px !important;
+          }
         }
       `}</style>
     </section>

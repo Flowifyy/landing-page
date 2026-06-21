@@ -2,7 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import { Play, Pause } from 'lucide-react';
-import SideRays from './animation/SideRays';
+import SideRays from '../animation/SideRays';
 
 export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
   const videoRef = useRef(null);
@@ -29,6 +29,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
   return (
     <section
       id="hero"
+      className="mobile-hero-section"
       style={{
         paddingTop: 'calc(var(--space-8) * 1.8)',
         paddingBottom: 'var(--space-8)',
@@ -68,7 +69,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
       <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
         <div className="grid-layout">
           {/* Hero Left: Editorial Heading Copy */}
-          <div className="fade-in-staged" style={{ animationDelay: '0.1s' }}>
+          <div className="fade-in-staged hero-text-container" style={{ animationDelay: '0.1s' }}>
 
             <h1
               style={{
@@ -86,9 +87,9 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
           </div>
 
           {/* Hero Right: Premium Video Player */}
-          <div className="fade-in-staged" style={{ animationDelay: '0.3s' }}>
+          <div className="fade-in-staged hero-video-container" style={{ animationDelay: '0.3s' }}>
             <div
-              className="card-premium"
+              className="card-premium mobile-video-card"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -103,6 +104,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
             >
               {/* Window Header */}
               <div
+                className="mobile-video-header"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -122,7 +124,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-warning)' }}></span>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }}></span>
                   </div>
-                  <span>toolare.mp4</span>
+                  <span>hero.mp4</span>
                 </div>
               </div>
 
@@ -180,6 +182,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                     }}
                   >
                     <button
+                      className="mobile-play-button"
                       onClick={togglePlay}
                       style={{
                         backgroundColor: 'rgba(7, 7, 9, 0.75)',
@@ -195,7 +198,7 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
                         transition: 'transform var(--transition-fast)'
                       }}
                     >
-                      {isPlaying ? <Pause size={16} fill="#FFFFFF" /> : <Play size={16} fill="#FFFFFF" style={{ marginLeft: '2px' }} />}
+                      {isPlaying ? <Pause size={16} className="play-icon-svg" fill="#FFFFFF" /> : <Play size={16} className="play-icon-svg" fill="#FFFFFF" style={{ marginLeft: '2px' }} />}
                     </button>
                   </div>
                 </div>
@@ -208,6 +211,44 @@ export const Hero = ({ onOpenAudit: _onOpenAudit }) => {
         @keyframes recordingBlink {
           0%, 100% { opacity: 1; }
           50% { opacity: 0; }
+        }
+        
+        @media (max-width: 767px) {
+          .mobile-hero-section {
+            padding-top: 100px !important;
+            padding-bottom: var(--space-6) !important;
+            min-height: auto !important;
+          }
+          .hero-text-container {
+            order: 2 !important;
+          }
+          .hero-video-container {
+            order: 1 !important;
+            width: calc(100% + (2 * var(--space-4))) !important;
+            margin-left: calc(-1 * var(--space-4)) !important;
+            margin-right: calc(-1 * var(--space-4)) !important;
+          }
+          .mobile-video-card {
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+            margin-top: 0px !important;
+            margin-bottom: var(--space-4) !important;
+          }
+          .mobile-video-header {
+            padding: var(--space-2) var(--space-2) !important;
+            font-size: 10px !important;
+            border-radius: 0px !important;
+          }
+          .mobile-play-button {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .mobile-play-button .play-icon-svg {
+            width: 12px !important;
+            height: 12px !important;
+          }
         }
       `}</style>
     </section>

@@ -1,40 +1,15 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Sun, Moon, Menu, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
  
 ];
 
 export const Header = ({ onOpenAudit }) => {
-  const [theme, setTheme] = useState('dark');
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  // Initialize and track theme
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    const initialTheme = savedTheme || 'dark';
-    setTheme(initialTheme);
-    if (initialTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const nextTheme = theme === 'light' ? 'dark' : 'light';
-    setTheme(nextTheme);
-    if (nextTheme === 'dark') {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
 
   // Scroll height shrink trigger
   useEffect(() => {
@@ -47,6 +22,7 @@ export const Header = ({ onOpenAudit }) => {
 
   return (
     <div
+      className="mobile-header-container"
       style={{
         position: 'fixed',
         top: isScrolled ? '12px' : '20px',
@@ -59,6 +35,7 @@ export const Header = ({ onOpenAudit }) => {
       }}
     >
       <header 
+        className="mobile-header-wrapper"
         style={{
           width: '100%',
           border: '2px solid var(--color-text-primary)',
@@ -71,6 +48,7 @@ export const Header = ({ onOpenAudit }) => {
         }}
       >
         <div 
+          className="mobile-header-inner"
           style={{ 
             display: 'flex', 
             justifyContent: 'space-between', 
@@ -87,6 +65,7 @@ export const Header = ({ onOpenAudit }) => {
             style={{ display: 'flex', alignItems: 'center' }}
           >
             <img 
+              className="mobile-logo"
               src="/in-line-flowify.svg" 
               alt="Flowify" 
               style={{
@@ -124,40 +103,7 @@ export const Header = ({ onOpenAudit }) => {
           </nav>
 
           {/* Global Controls & Call to Action */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
-            {/* Light/Dark Toggle */}
-            <button 
-              onClick={toggleTheme}
-              aria-label="Toggle visual theme"
-              className="theme-switch-brutal"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                width: '38px',
-                height: '38px',
-                border: '1px solid var(--color-text-primary)',
-                backgroundColor: 'var(--color-surface)',
-                boxShadow: '2px 2px 0px var(--color-text-primary)',
-                transition: 'all 0.15s ease',
-                cursor: 'pointer'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(-1px, -1px)';
-                e.currentTarget.style.boxShadow = '3px 3px 0px var(--color-text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '2px 2px 0px var(--color-text-primary)';
-              }}
-            >
-              {theme === 'light' ? (
-                <Moon size={16} strokeWidth={2.5} style={{ color: 'var(--color-text-primary)' }} />
-              ) : (
-                <Sun size={16} strokeWidth={2.5} style={{ color: 'var(--color-text-primary)' }} />
-              )}
-            </button>
-
+          <div className="mobile-controls-gap" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
             {/* Book Audit Direct Trigger */}
             <button 
               onClick={onOpenAudit}
@@ -306,6 +252,37 @@ export const Header = ({ onOpenAudit }) => {
         }
         @media (max-width: 767px) {
           .desktop-links { display: none !important; }
+          
+          /* Mobile style overrides with !important to defeat inline styles */
+          .mobile-header-container {
+            top: 8px !important;
+            width: calc(100% - 16px) !important;
+          }
+          .mobile-header-wrapper {
+            box-shadow: 4px 4px 0px var(--color-text-primary) !important;
+          }
+          .mobile-header-inner {
+            height: 52px !important;
+            padding-inline: var(--space-3) !important;
+          }
+          .mobile-logo {
+            height: 20px !important;
+          }
+          .mobile-controls-gap {
+            gap: var(--space-2) !important;
+          }
+          .mobile-hamburger-brutal {
+            width: 32px !important;
+            height: 32px !important;
+          }
+          .mobile-hamburger-brutal svg {
+            width: 16px !important;
+            height: 16px !important;
+          }
+          .mobile-slide-drawer-brutal {
+            padding: var(--space-3) !important;
+            gap: var(--space-2) !important;
+          }
         }
         
         /* Brutalist link hover effects */

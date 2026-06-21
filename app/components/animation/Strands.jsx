@@ -294,6 +294,7 @@ export default function Strands({
     });
     const glassMesh = new Mesh(gl, { geometry, program: glassProgram });
 
+    ctn.innerHTML = '';
     ctn.appendChild(gl.canvas);
 
     function resize() {

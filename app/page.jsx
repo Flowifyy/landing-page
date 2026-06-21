@@ -2,13 +2,13 @@
 
 import { useState } from 'react';
 import { Header } from './components/Header';
-import { Hero } from './components/Hero';
-import { WorkflowSection } from './components/WorkflowSection';
-import { Services } from './components/Services';
-import { WhatWeDoSection } from './components/WhatWeDoSection';
-import { PhilosophySection } from './components/PhilosophySection';
+import { Hero } from './components/home/Hero';
+import { WhatAutoFlow } from './components/home/WhatAutoFlow';
+import { WhoConcept } from './components/home/WhoConcept';
+import { HowWeDo } from './components/home/HowWeDo';
+import { AutomationIsntAboutReplacingHumans } from './components/AutomationIsntAboutReplacingHumans';
 import { Footer } from './components/Footer';
-import { AuditDialog } from './components/AuditDialog';
+
 
 export default function Home() {
   const [isAuditOpen, setIsAuditOpen] = useState(false);
@@ -59,16 +59,16 @@ export default function Home() {
         <Hero onOpenAudit={() => handleOpenAudit()} />
 
         {/* Workflow Section */}
-        <WorkflowSection />
+        <WhatAutoFlow />
 
         {/* What We Do Services Accordion */}
-        <Services />
+        <WhoConcept />
 
         {/* What We Do Mission & Features Section */}
-        <WhatWeDoSection />
+        <HowWeDo />
 
         {/* Philosophy Section */}
-        <PhilosophySection />
+        <AutomationIsntAboutReplacingHumans />
 
       </main>
 
@@ -76,13 +76,7 @@ export default function Home() {
       {/* System specifications footer */}
       <Footer />
 
-      {/* Accessible modal dialog request for Friction Audits */}
-      <AuditDialog 
-        isOpen={isAuditOpen} 
-        onClose={handleCloseAudit} 
-        computedLeak={computedLeak}
-        onSubmitAudit={handleSubmitAuditForm}
-      />
+
     </div>
   );
 }
