@@ -70,7 +70,7 @@ const engines = [
   }
 ];
 
-export const WhoConcept = () => {
+export const Section3 = () => {
   const [revealRef, isVisible] = useReveal(0.1);
   const [activeIndex, setActiveIndex] = useState(null);
   const containerRef = useRef(null);
@@ -89,7 +89,7 @@ export const WhoConcept = () => {
 
   const getPanelCenters = () => {
     const W = containerWidth;
-    const G = 24; // var(--space-4) gap
+    const G = containerWidth < 768 ? 8 : 24; // var(--space-4) gap
     const P_total = W - 3 * G;
     const U = P_total / 5.8;
     const W_inactive = U;
@@ -108,6 +108,9 @@ export const WhoConcept = () => {
 
   const centers = getPanelCenters();
   const activeColor = activeIndex !== null ? engines[activeIndex].color : 'var(--color-border-high)';
+  const svgHeight = containerWidth < 768 ? 90 : 130;
+  const yEnd = containerWidth < 768 ? 55 : 85;
+  const yLineEnd = containerWidth < 768 ? 80 : 120;
 
   return (
     <section
@@ -130,9 +133,7 @@ export const WhoConcept = () => {
         
         {/* Section Heading */}
         <div style={{ maxWidth: '820px', marginBottom: 'var(--space-6)', display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
-          <span className="section-tag" style={{ marginBottom: 'var(--space-3)' }}>
-             The flow that every crore company has used
-          </span>
+        
           <h2
             style={{
               fontSize: 'var(--font-size-h2)',
@@ -159,6 +160,7 @@ export const WhoConcept = () => {
                 className={`service-panel ${isActive ? 'active' : ''}`}
                 style={{
                   borderColor: isActive ? engine.color : 'var(--color-border)',
+                  '--panel-color': engine.color,
                   boxShadow: isActive ? `8px 8px 0px ${engine.color}` : 'none'
                 }}
               >
@@ -190,7 +192,7 @@ export const WhoConcept = () => {
                     {/* Titles */}
                     <h3 
                       style={{ 
-                        fontSize: 'var(--font-size-h3)', 
+                        fontSize: '1.2rem', 
                         fontWeight: 800, 
                         color: 'var(--color-text-primary)',
                         marginBottom: '8px'
@@ -200,7 +202,7 @@ export const WhoConcept = () => {
                     </h3>
                     <h4 
                       style={{ 
-                        fontSize: 'var(--font-size-sm)', 
+                        fontSize: '0.8rem', 
                         fontFamily: 'var(--font-heading-mono)',
                         fontWeight: 600, 
                         color: engine.color,
@@ -213,15 +215,15 @@ export const WhoConcept = () => {
                     </h4>
 
                     {/* Description */}
-                    <p style={{ fontSize: 'var(--font-size-body)', marginBottom: 'var(--space-4)', color: 'var(--color-text-secondary)' }}>
+                    <p style={{ fontSize: '0.85rem', marginBottom: 'var(--space-4)', color: 'var(--color-text-secondary)' }}>
                       {engine.description}
                     </p>
 
                     {/* Features List */}
                     <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: 'var(--space-4)' }}>
                       {engine.features.map((feat) => (
-                        <li key={feat} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: 'var(--font-size-sm)', color: 'var(--color-text-primary)' }}>
-                          <CheckCircle2 size={16} style={{ color: engine.color, flexShrink: 0 }} />
+                        <li key={feat} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.8rem', color: 'var(--color-text-primary)' }}>
+                          <CheckCircle2 size={14} style={{ color: engine.color, flexShrink: 0 }} />
                           <span>{feat}</span>
                         </li>
                       ))}
@@ -293,11 +295,19 @@ export const WhoConcept = () => {
         </div>
 
         {/* SVG Pipeline Diagram */}
-        <div className="pipeline-container" style={{ width: '100%', marginTop: 'var(--space-4)', position: 'relative' }}>
+        <div 
+          className="pipeline-container" 
+          style={{ 
+            width: '100%', 
+            marginTop: 'var(--space-4)', 
+            position: 'relative',
+            '--active-color': activeColor
+          }}
+        >
           <svg 
             width={containerWidth} 
-            height={130} 
-            viewBox={`0 0 ${containerWidth} 130`}
+            height={svgHeight} 
+            viewBox={`0 0 ${containerWidth} ${svgHeight}`}
             style={{ display: 'block', overflow: 'visible' }}
           >
             <defs>
@@ -320,7 +330,6 @@ export const WhoConcept = () => {
               const xStart = centers[idx] || 0;
               const xEnd = containerWidth / 2;
               const yStart = 0;
-              const yEnd = 85;
 
               // Cubic Bezier curve path
               const pathD = `M ${xStart} ${yStart} C ${xStart} ${yEnd / 2}, ${xEnd} ${yEnd / 2}, ${xEnd} ${yEnd}`;
@@ -343,7 +352,7 @@ export const WhoConcept = () => {
             {/* Relay Node */}
             <circle 
               cx={containerWidth / 2} 
-              cy={85} 
+              cy={yEnd} 
               r={5.5} 
               fill={activeColor} 
               stroke="var(--color-bg)" 
@@ -353,7 +362,7 @@ export const WhoConcept = () => {
 
             {/* Main output pipeline stream going downwards */}
             <path 
-              d={`M ${containerWidth / 2} 85 L ${containerWidth / 2} 120`} 
+              d={`M ${containerWidth / 2} ${yEnd} L ${containerWidth / 2} ${yLineEnd}`} 
               fill="none"
               stroke={activeColor}
               strokeWidth={3.5}
@@ -411,7 +420,7 @@ export const WhoConcept = () => {
 
             {/* Click to Contact Mailto Link */}
             <a
-              href="mailto:hello@flowify.agency?subject=Operational Inquiry"
+              href="mailto:flowifyy.agency@gmail.com?subject=Operational Inquiry"
               className="underline underline-offset-4"
               style={{
                 marginTop: '12px',
@@ -521,59 +530,134 @@ export const WhoConcept = () => {
         /* Mobile Responsive Overrides */
         @media (max-width: 767px) {
           .services-flex-container {
-            flex-direction: column;
-            min-height: auto;
-            gap: var(--space-3);
+            flex-direction: row !important;
+            min-height: 380px !important;
+            gap: 8px !important;
           }
 
           .service-panel {
-            width: 100% !important;
-            height: auto !important;
-            flex: none !important;
-            padding: var(--space-4) !important;
-            transition: border-color var(--transition-normal), 
-                        box-shadow var(--transition-normal),
-                        background-color var(--transition-normal) !important;
+            flex: 1 !important;
+          }
+
+          .service-panel.active {
+            flex: 2.8 !important;
+            box-shadow: 4px 4px 0px var(--panel-color) !important;
           }
 
           .service-panel .active-content {
-            position: relative !important;
-            top: 0 !important;
-            left: 0 !important;
-            right: 0 !important;
-            bottom: 0 !important;
-            opacity: 1 !important;
-            transform: none !important;
-            visibility: visible !important;
-            pointer-events: auto !important;
+            top: var(--space-2) !important;
+            left: var(--space-2) !important;
+            right: var(--space-2) !important;
+            bottom: var(--space-2) !important;
+            width: calc(100% - 16px) !important;
+            height: calc(100% - 16px) !important;
+            position: absolute !important;
             display: flex !important;
-            width: 100% !important;
-            height: auto !important;
+            padding: 0 !important;
+            visibility: hidden;
+            opacity: 0;
+            pointer-events: none;
+          }
+
+          .service-panel.active .active-content {
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
           }
 
           .service-panel .inactive-content {
-            display: none !important;
+            display: flex !important;
+            position: absolute !important;
+            inset: 0 !important;
+            padding-block: var(--space-3) !important;
+            opacity: 1 !important;
+            visibility: visible !important;
+            pointer-events: auto !important;
           }
-          
-          /* For mobile, simplify accordion by showing headings and expanding details on click */
-          .service-panel:not(.active) .active-content ul,
-          .service-panel:not(.active) .active-content p,
-          .service-panel:not(.active) .active-content a {
-            display: none !important;
-          }
-          
-          .service-panel:not(.active) {
-            box-shadow: none !important;
-            border-color: var(--color-border) !important;
-          }
-        }
 
-        .pipeline-container {
-          display: block;
-        }
-        @media (max-width: 767px) {
+          .service-panel.active .inactive-content {
+            opacity: 0 !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+          }
+
+          /* Inactive rotated vertical title and indicator dots */
+          .service-panel .inactive-content span {
+            font-size: 8.5px !important;
+          }
+          .service-panel .inactive-content .vertical-title-text {
+            font-size: 9px !important;
+          }
+          .service-panel .inactive-content div {
+            width: 5px !important;
+            height: 5px !important;
+          }
+
+          /* Active Panel Contents: Titles, Subtitles, Paragraphs, Lists */
+          .service-panel .active-content h3 {
+            font-size: 11px !important;
+            margin-bottom: 4px !important;
+            line-height: 1.1 !important;
+          }
+          .service-panel .active-content h4 {
+            font-size: 7px !important;
+            margin-bottom: 4px !important;
+          }
+          .service-panel .active-content p {
+            font-size: 8px !important;
+            line-height: 1.2 !important;
+            margin-bottom: 6px !important;
+          }
+          .service-panel .active-content ul {
+            gap: 3px !important;
+            margin-bottom: 6px !important;
+          }
+          .service-panel .active-content li {
+            font-size: 7.5px !important;
+            gap: 3px !important;
+          }
+          .service-panel .active-content li svg {
+            width: 8px !important;
+            height: 8px !important;
+          }
+
+          /* active content buttons */
+          .service-panel .active-content a.btn-core {
+            font-size: 6.5px !important;
+            padding: 4px 8px !important;
+            gap: 3px !important;
+            margin-top: auto !important;
+          }
+          .service-panel .active-content a.btn-core svg {
+            width: 6.5px !important;
+            height: 6.5px !important;
+          }
+
+          /* SVG Pipeline is visible on mobile too */
           .pipeline-container {
-            display: none !important;
+            display: block !important;
+            margin-top: var(--space-3) !important;
+          }
+          .pipeline-container svg {
+            height: 90px !important;
+          }
+
+          /* Goal Callout Box */
+          .pipeline-container .underline {
+            font-size: 8.5px !important;
+            margin-top: 6px !important;
+          }
+          .pipeline-container p {
+            font-size: 8.5px !important;
+            margin-top: 8px !important;
+            max-width: 290px !important;
+            line-height: 1.4 !important;
+          }
+          .pipeline-container div div {
+            font-size: 8.5px !important;
+            padding: 5px 10px !important;
+            box-shadow: 3px 3px 0px var(--active-color) !important;
+            border-color: var(--active-color) !important;
           }
         }
       `}</style>

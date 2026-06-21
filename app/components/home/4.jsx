@@ -55,7 +55,7 @@ const getPathInfo = (x) => {
   }
 };
 
-export const HowWeDo = () => {
+export const Section4 = () => {
   const [revealRef, isVisible] = useReveal(0.1);
   const containerRef = useRef(null);
   const [pulseIndex, setPulseIndex] = useState(null);
@@ -196,9 +196,10 @@ export const HowWeDo = () => {
               color: 'var(--color-accent)'
             }}
           >
-            HOW WE HELP YOUR BUSINESS
+            4-step Process
           </span>
           <h2
+            className="section4-heading"
             style={{
               fontSize: 'var(--font-size-h2)',
               lineHeight: 1.15,
@@ -208,9 +209,9 @@ export const HowWeDo = () => {
               fontWeight: 800
             }}
           >
-            A collaborative process built to increase your{" "}
+            The steps to make you have a{" "}
             <span className="editorial-serif" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-heading-serif)', background: 'linear-gradient(to right, #10B981, #34D399)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              operating margins.
+              new productive workflow.
             </span>
           </h2>
         </div>
@@ -319,6 +320,7 @@ export const HowWeDo = () => {
                   transform={`translate(${xPos}, ${yPos}) rotate(${angle})`}
                   onMouseEnter={() => setHoveredIndex(idx)}
                   onMouseLeave={() => setHoveredIndex(null)}
+                  onClick={() => setHoveredIndex(hoveredIndex === idx ? null : idx)}
                   className={`pipeline-text-label ${isActive ? 'active' : ''}`}
                   style={{
                     fill: isActive ? '#FFFFFF' : 'var(--color-text-muted)',
@@ -444,25 +446,46 @@ export const HowWeDo = () => {
         }
 
         @media (max-width: 767px) {
-          /* Responsive styling for mobile: keep it simple but functional */
+          /* Responsive styling for mobile: identical to desktop */
+          .section4-heading {
+            font-size: 1.8rem !important;
+          }
+
           .pipeline-wrapper {
-            display: none !important;
+            display: block !important;
+            height: 80px !important;
+            margin-bottom: var(--space-4) !important;
+          }
+
+          .pipeline-text-label {
+            font-size: 32px !important;
           }
 
           .pipeline-description-display {
-            min-height: auto;
-            gap: var(--space-4);
+            min-height: 80px !important;
+            gap: 0 !important;
+            margin-top: var(--space-4) !important;
           }
 
           .step-desc-wrapper {
-            position: relative !important;
-            opacity: 1 !important;
-            transform: none !important;
-            padding: var(--space-4);
-            border: 1px solid var(--color-border);
-            background-color: var(--color-surface);
-            border-radius: var(--radius-sm);
-            margin-bottom: var(--space-3);
+            position: absolute !important;
+            padding: 0 var(--space-4) !important;
+            border: none !important;
+            background-color: transparent !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            margin-bottom: 0 !important;
+          }
+
+          .step-desc-wrapper span {
+            font-size: 9px !important;
+            margin-bottom: 4px !important;
+          }
+
+          .step-desc-wrapper p {
+            font-size: 11px !important;
+            line-height: 1.4 !important;
+            max-width: 320px !important;
           }
         }
       `}</style>

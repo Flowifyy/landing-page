@@ -1,16 +1,26 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
 import { useReveal } from '../../hooks/useReveal';
 
-export const WhatAutoFlow = () => {
+export const Section2 = ({ playingVideoId, setPlayingVideoId }) => {
   const [revealRef, isVisible] = useReveal(0.1);
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isMuted, setIsMuted] = useState(false);
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (playingVideoId !== 'workflow' && isPlaying) {
+      video.pause();
+      setIsPlaying(false);
+    }
+  }, [playingVideoId, isPlaying]);
 
   const togglePlay = (e) => {
     if (e) e.stopPropagation();
@@ -20,12 +30,16 @@ export const WhatAutoFlow = () => {
     if (isPlaying) {
       video.pause();
       setIsPlaying(false);
+      if (setPlayingVideoId) setPlayingVideoId(null);
     } else {
       if (video.ended) {
         video.currentTime = 0;
       }
       video.play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          if (setPlayingVideoId) setPlayingVideoId('workflow');
+        })
         .catch((err) => console.log("Playback failed:", err));
     }
   };
@@ -165,7 +179,12 @@ export const WhatAutoFlow = () => {
                   playsInline
                   onTimeUpdate={handleTimeUpdate}
                   onLoadedMetadata={handleLoadedMetadata}
-                  onEnded={() => setIsPlaying(false)}
+                  onEnded={() => {
+                     setIsPlaying(false);
+                     if (playingVideoId === 'workflow' && setPlayingVideoId) {
+                       setPlayingVideoId(null);
+                     }
+                   }}
                   style={{
                     width: '100%',
                     height: '100%',

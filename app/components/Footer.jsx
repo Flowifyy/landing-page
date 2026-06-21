@@ -1,4 +1,7 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
+
+const SoftAurora = dynamic(() => import('./SoftAurora'), { ssr: false });
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -6,16 +9,45 @@ export const Footer = () => {
   return (
     <footer 
       style={{
-        backgroundColor: 'var(--color-surface)',
+        backgroundColor: 'color-mix(in srgb, var(--color-bg) 80%, transparent)',
         borderTop: '1px solid var(--color-border)',
         paddingBlock: 'var(--space-6)',
         fontSize: 'var(--font-size-sm)',
         color: 'var(--color-text-secondary)',
         position: 'relative',
-        zIndex: 5
+        zIndex: 5,
+        overflow: 'hidden'
       }}
     >
-      <div className="container">
+      {/* WebGL Animated Background */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          zIndex: 1, 
+          pointerEvents: 'none', 
+          opacity: 0.6
+        }}
+      >
+        <SoftAurora
+          speed={0.6}
+          scale={1.5}
+          brightness={1.0}
+          color1="#047857"
+          color2="#047857"
+          noiseFrequency={2.5}
+          noiseAmplitude={1.0}
+          bandHeight={0.5}
+          bandSpread={1.0}
+          octaveDecay={0.1}
+          layerOffset={0}
+          colorSpeed={1.0}
+          enableMouseInteraction={true}
+          mouseInfluence={0.25}
+        />
+      </div>
+
+      <div className="container" style={{ position: 'relative', zIndex: 2 }}>
         <div 
           style={{
             display: 'grid',

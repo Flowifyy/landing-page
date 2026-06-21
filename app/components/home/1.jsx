@@ -1,81 +1,109 @@
 "use client";
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Play, Pause } from 'lucide-react';
-import { useReveal } from '../hooks/useReveal';
+import SideRays from '../animation/SideRays';
 
-export const AutomationIsntAboutReplacingHumans = () => {
-  const [revealRef, isVisible] = useReveal(0.1);
+export const Section1 = ({ onOpenAudit: _onOpenAudit, playingVideoId, setPlayingVideoId }) => {
   const videoRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (playingVideoId !== 'hero' && isPlaying) {
+      video.pause();
+      setIsPlaying(false);
+    }
+  }, [playingVideoId, isPlaying]);
+
   const togglePlay = (e) => {
-    if (e) e.stopPropagation();
+    e.stopPropagation();
     const video = videoRef.current;
     if (!video) return;
 
     if (isPlaying) {
       video.pause();
       setIsPlaying(false);
+      if (setPlayingVideoId) setPlayingVideoId(null);
     } else {
       if (video.ended) {
         video.currentTime = 0;
       }
       video.play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          if (setPlayingVideoId) setPlayingVideoId('hero');
+        })
         .catch((err) => console.log("Playback failed:", err));
     }
   };
 
   return (
     <section
-      id="philosophy-section"
-      ref={revealRef}
-      className={`reveal ${isVisible ? 'visible' : ''}`}
+      id="hero"
+      className="mobile-hero-section"
       style={{
-        paddingTop: 'calc(var(--space-8) * 1.5)',
-        paddingBottom: 'calc(var(--space-8) * 1.5)',
+        paddingTop: 'calc(var(--space-8) * 1.8)',
+        paddingBottom: 'var(--space-8)',
         borderBottom: '1px solid var(--color-border)',
         overflow: 'hidden',
-        backgroundColor: 'var(--color-bg)'
+        position: 'relative',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center'
       }}
     >
-      <div className="container">
-        <div className="grid-layout">
-          
-          {/* Philosophy Left: Editorial Copy */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', textAlign: 'left' }}>
-            <span className="section-tag" style={{ marginBottom: 'var(--space-3)' }}>
-              Core Philosophy
-            </span>
+      {/* SideRays bottom-right animation */}
+      <div 
+        style={{ 
+          position: 'absolute', 
+          inset: 0, 
+          zIndex: 0, 
+          pointerEvents: 'none',
+          opacity: 0.7
+        }}
+      >
+        <SideRays
+          speed={2.5}
+          rayColor1="#047857"
+          rayColor2="#047857"
+          intensity={2.4}
+          spread={2}
+          origin="bottom-right"
+          tilt={60}
+          saturation={1.5}
+          blend={0.75}
+          falloff={2.3}
+          opacity={1.0}
+        />
+      </div>
 
-            <h2
+      <div className="container" style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+        <div className="grid-layout">
+          {/* Hero Left: Editorial Heading Copy */}
+          <div className="fade-in-staged hero-text-container" style={{ animationDelay: '0.1s' }}>
+
+            <h1
               style={{
-                fontSize: 'var(--font-size-h2)',
-                lineHeight: 1.25,
-                letterSpacing: '-0.03em',
-                marginBottom: 'var(--space-4)',
+                fontSize: 'var(--font-size-hero)',
+                lineHeight: 1.1,
+                letterSpacing: '-0.04em',
+                marginBottom: 'var(--space-3)',
                 color: 'var(--color-text-primary)'
               }}
             >
-              Automation isn't about{" "}
-              <span className="editorial-serif" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-heading-serif)' }}>
-                replacing people
-              </span>
-              ; it's about{" "}
-              <span className="editorial-serif" style={{ color: 'var(--color-accent)', fontFamily: 'var(--font-heading-serif)' }}>
-                freeing time
-              </span>{" "}
-              for more productive tasks.
-            </h2>
+              We automate your <span className="editorial-serif" style={{ color: 'var(--color-accent)' }}>business workflows</span> so you can focus on <span className="editorial-serif">growth</span>.
+            </h1>
 
-            <div style={{ width: '64px', height: '2px', backgroundColor: 'var(--color-accent)', marginBottom: 'var(--space-4)' }} />
+            <div style={{ width: '64px', height: '2px', backgroundColor: 'var(--color-accent)', marginBottom: 'var(--space-3)' }} />
           </div>
 
-          {/* Philosophy Right: Mockup Window Video Player */}
-          <div style={{ width: '100%', margin: '0 auto' }}>
+          {/* Hero Right: Premium Video Player */}
+          <div className="fade-in-staged hero-video-container" style={{ animationDelay: '0.3s' }}>
             <div
-              className="card-premium"
+              className="card-premium mobile-video-card"
               style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -90,6 +118,7 @@ export const AutomationIsntAboutReplacingHumans = () => {
             >
               {/* Window Header */}
               <div
+                className="mobile-video-header"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -109,7 +138,7 @@ export const AutomationIsntAboutReplacingHumans = () => {
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-warning)' }}></span>
                     <span style={{ width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--color-accent)' }}></span>
                   </div>
-                  <span>automation-isnt-about-replacing-humans.mp4</span>
+                  <span>hero.mp4</span>
                 </div>
               </div>
 
@@ -127,9 +156,15 @@ export const AutomationIsntAboutReplacingHumans = () => {
               >
                 <video
                   ref={videoRef}
-                  src="/video-asset/automation-isn't-about-repressing-people.mp4"
+                  src="/video-asset/hero-wala-video.mp4"
                   playsInline
-                  onEnded={() => setIsPlaying(false)}
+                  muted={false}
+                  onEnded={() => {
+                    setIsPlaying(false);
+                    if (playingVideoId === 'hero' && setPlayingVideoId) {
+                      setPlayingVideoId(null);
+                    }
+                  }}
                   style={{
                     width: '100%',
                     height: '100%',
@@ -151,6 +186,7 @@ export const AutomationIsntAboutReplacingHumans = () => {
                     zIndex: 2
                   }}
                 >
+                  {/* Top Bar inside Video */}
                   <div style={{ display: 'flex', justifyContent: 'flex-end', pointerEvents: 'auto' }}>
                   </div>
 
@@ -165,6 +201,7 @@ export const AutomationIsntAboutReplacingHumans = () => {
                     }}
                   >
                     <button
+                      className="mobile-play-button"
                       onClick={togglePlay}
                       style={{
                         backgroundColor: 'rgba(7, 7, 9, 0.75)',
@@ -180,16 +217,59 @@ export const AutomationIsntAboutReplacingHumans = () => {
                         transition: 'transform var(--transition-fast)'
                       }}
                     >
-                      {isPlaying ? <Pause size={16} fill="#FFFFFF" /> : <Play size={16} fill="#FFFFFF" style={{ marginLeft: '2px' }} />}
+                      {isPlaying ? <Pause size={16} className="play-icon-svg" fill="#FFFFFF" /> : <Play size={16} className="play-icon-svg" fill="#FFFFFF" style={{ marginLeft: '2px' }} />}
                     </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
+      <style>{`
+        @keyframes recordingBlink {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0; }
+        }
+        
+        @media (max-width: 767px) {
+          .mobile-hero-section {
+            padding-top: 100px !important;
+            padding-bottom: var(--space-6) !important;
+            min-height: auto !important;
+          }
+          .hero-text-container {
+            order: 2 !important;
+          }
+          .hero-video-container {
+            order: 1 !important;
+            width: calc(100% + (2 * var(--space-4))) !important;
+            margin-left: calc(-1 * var(--space-4)) !important;
+            margin-right: calc(-1 * var(--space-4)) !important;
+          }
+          .mobile-video-card {
+            border-left: none !important;
+            border-right: none !important;
+            border-radius: 0px !important;
+            box-shadow: none !important;
+            margin-top: 0px !important;
+            margin-bottom: var(--space-4) !important;
+          }
+          .mobile-video-header {
+            padding: var(--space-2) var(--space-2) !important;
+            font-size: 10px !important;
+            border-radius: 0px !important;
+          }
+          .mobile-play-button {
+            width: 28px !important;
+            height: 28px !important;
+          }
+          .mobile-play-button .play-icon-svg {
+            width: 12px !important;
+            height: 12px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

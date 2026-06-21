@@ -2,17 +2,19 @@
 
 import { useState } from 'react';
 import { Header } from './components/Header';
-import { Hero } from './components/home/Hero';
-import { WhatAutoFlow } from './components/home/WhatAutoFlow';
-import { WhoConcept } from './components/home/WhoConcept';
-import { HowWeDo } from './components/home/HowWeDo';
-import { AutomationIsntAboutReplacingHumans } from './components/AutomationIsntAboutReplacingHumans';
+import { Section1 } from './components/home/1';
+import { Section2 } from './components/home/2';
+import { Section3 } from './components/home/3';
+import { Section4 } from './components/home/4';
+import { Section5 } from './components/home/5';
+import { Section6 } from './components/home/6';
 import { Footer } from './components/Footer';
 
 
 export default function Home() {
   const [isAuditOpen, setIsAuditOpen] = useState(false);
   const [computedLeak, setComputedLeak] = useState('₹5,40,000/yr');
+  const [playingVideoId, setPlayingVideoId] = useState(null);
 
   const handleOpenAudit = (leakVal) => {
     if (leakVal && typeof leakVal === 'string') {
@@ -56,19 +58,22 @@ export default function Home() {
       <main style={{ flexGrow: 1 }}>
         
         {/* Hero Section containing the Automation Cockpit */}
-        <Hero onOpenAudit={() => handleOpenAudit()} />
+        <Section1 onOpenAudit={() => handleOpenAudit()} playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} />
 
         {/* Workflow Section */}
-        <WhatAutoFlow />
+        <Section2 playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} />
 
         {/* What We Do Services Accordion */}
-        <WhoConcept />
+        <Section3 />
 
         {/* What We Do Mission & Features Section */}
-        <HowWeDo />
+        <Section4 />
 
         {/* Philosophy Section */}
-        <AutomationIsntAboutReplacingHumans />
+        <Section5 playingVideoId={playingVideoId} setPlayingVideoId={setPlayingVideoId} />
+
+        {/* Contact Section */}
+        <Section6 />
 
       </main>
 

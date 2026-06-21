@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
 
 const navLinks = [
  
@@ -9,7 +8,6 @@ const navLinks = [
 
 export const Header = ({ onOpenAudit }) => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // Scroll height shrink trigger
   useEffect(() => {
@@ -25,25 +23,25 @@ export const Header = ({ onOpenAudit }) => {
       className="mobile-header-container"
       style={{
         position: 'fixed',
-        top: isScrolled ? '12px' : '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        width: 'calc(100% - 32px)',
-        maxWidth: '1200px',
+        top: 0,
+        left: 0,
+        width: '100%',
         zIndex: 1000,
-        transition: 'top 0.3s cubic-bezier(0.16, 1, 0.3, 1), width 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
+        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
       }}
     >
       <header 
         className="mobile-header-wrapper"
         style={{
           width: '100%',
-          border: '2px solid var(--color-text-primary)',
-          backgroundColor: 'color-mix(in srgb, var(--color-surface) 85%, transparent)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          boxShadow: '6px 6px 0px var(--color-text-primary)',
-          borderRadius: 'var(--radius-sm)',
+          borderLeft: 'none',
+          borderRight: 'none',
+          borderTop: 'none',
+          borderBottom: '1px solid color-mix(in srgb, var(--color-border) 30%, transparent)',
+          backgroundColor: 'color-mix(in srgb, var(--color-surface) 15%, transparent)',
+          backdropFilter: 'blur(20px)',
+          WebkitBackdropFilter: 'blur(20px)',
+          borderRadius: 0,
           transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)'
         }}
       >
@@ -61,7 +59,6 @@ export const Header = ({ onOpenAudit }) => {
           {/* Brand Logo */}
           <a 
             href="#hero" 
-            onClick={() => setMobileMenuOpen(false)}
             style={{ display: 'flex', alignItems: 'center' }}
           >
             <img 
@@ -105,161 +102,61 @@ export const Header = ({ onOpenAudit }) => {
           {/* Global Controls & Call to Action */}
           <div className="mobile-controls-gap" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
             {/* Book Audit Direct Trigger */}
-            <button 
-              onClick={onOpenAudit}
-              className="btn-brutal-nav desktop-only"
-              style={{
-                fontFamily: 'var(--font-heading-mono)',
-                fontSize: '0.8rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                backgroundColor: 'var(--color-accent)',
-                color: '#070709',
-                border: '2px solid var(--color-text-primary)',
-                boxShadow: '4px 4px 0px var(--color-text-primary)',
-                padding: '8px 16px',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                e.currentTarget.style.boxShadow = '6px 6px 0px var(--color-text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '4px 4px 0px var(--color-text-primary)';
-              }}
+            <a 
+              href="mailto:flowifyy.agency@gmail.com?subject=Free Operations Audit Inquiry"
+              className="btn-brutal-nav"
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}
             >
               Free Operations Audit
-            </button>
-
-            {/* Mobile hamburger menu */}
-            <button 
-              className="mobile-hamburger-brutal"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              aria-label="Toggle navigation menu"
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                justifyContent: 'center', 
-                width: '38px', 
-                height: '38px', 
-                border: '1px solid var(--color-text-primary)', 
-                color: 'var(--color-text-primary)',
-                boxShadow: '2px 2px 0px var(--color-text-primary)',
-                backgroundColor: 'var(--color-surface)',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(-1px, -1px)';
-                e.currentTarget.style.boxShadow = '3px 3px 0px var(--color-text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '2px 2px 0px var(--color-text-primary)';
-              }}
-            >
-              {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
+            </a>
           </div>
         </div>
-
-        {/* Mobile Slide Drawer Navigation Overlay (Expanding inner container) */}
-        {mobileMenuOpen && (
-          <div 
-            className="mobile-slide-drawer-brutal"
-            style={{
-              borderTop: '2px solid var(--color-text-primary)',
-              padding: 'var(--space-4)',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: 'var(--space-3)',
-              backgroundColor: 'var(--color-surface)'
-            }}
-          >
-            {navLinks.map((link) => {
-              return (
-                <a 
-                  key={link.name} 
-                  href={link.anchor}
-                  onClick={() => setMobileMenuOpen(false)}
-                  style={{
-                    fontFamily: 'var(--font-heading-mono)',
-                    fontSize: '0.9rem',
-                    fontWeight: 700,
-                    textTransform: 'uppercase',
-                    color: 'var(--color-text-primary)',
-                    border: '1px solid var(--color-border)',
-                    padding: '12px var(--space-3)',
-                    backgroundColor: 'var(--color-bg)',
-                    transition: 'all 0.15s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-text-primary)';
-                    e.currentTarget.style.backgroundColor = 'var(--color-surface-subtle)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.borderColor = 'var(--color-border)';
-                    e.currentTarget.style.backgroundColor = 'var(--color-bg)';
-                  }}
-                >
-                  {link.name}
-                </a>
-              );
-            })}
-            <button 
-              onClick={() => {
-                setMobileMenuOpen(false);
-                onOpenAudit();
-              }}
-              style={{
-                width: '100%',
-                marginTop: 'var(--space-2)',
-                fontFamily: 'var(--font-heading-mono)',
-                fontSize: '0.9rem',
-                fontWeight: 700,
-                textTransform: 'uppercase',
-                backgroundColor: 'var(--color-accent)',
-                color: '#070709',
-                border: '2px solid var(--color-text-primary)',
-                boxShadow: '4px 4px 0px var(--color-text-primary)',
-                padding: '12px 16px',
-                cursor: 'pointer',
-                transition: 'all 0.15s ease'
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translate(-2px, -2px)';
-                e.currentTarget.style.boxShadow = '6px 6px 0px var(--color-text-primary)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'none';
-                e.currentTarget.style.boxShadow = '4px 4px 0px var(--color-text-primary)';
-              }}
-            >
-              Free Operations Audit
-            </button>
-          </div>
-        )}
       </header>
       
       {/* Brutalist styling variables & hover definitions */}
       <style>{`
-        .desktop-only { display: none; }
-        @media (min-width: 768px) {
-          .desktop-only { display: inline-flex; }
-          .mobile-hamburger-brutal { display: none !important; }
+        .btn-brutal-nav {
+          font-family: var(--font-heading-mono);
+          font-size: 0.8rem;
+          font-weight: 700;
+          text-transform: uppercase;
+          background-color: var(--color-accent);
+          color: #070709;
+          border: 2px solid var(--color-text-primary);
+          box-shadow: 4px 4px 0px var(--color-text-primary);
+          padding: 8px 16px;
+          cursor: pointer;
+          transition: all 0.15s ease;
         }
+
+        .btn-brutal-nav:hover {
+          transform: translate(-2px, -2px);
+          box-shadow: 6px 6px 0px var(--color-text-primary);
+        }
+
+        .btn-brutal-nav:active {
+          transform: translate(2px, 2px);
+          box-shadow: 0px 0px 0px var(--color-text-primary);
+        }
+
         @media (max-width: 767px) {
           .desktop-links { display: none !important; }
           
           /* Mobile style overrides with !important to defeat inline styles */
           .mobile-header-container {
-            top: 8px !important;
-            width: calc(100% - 16px) !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 100% !important;
+            transform: none !important;
           }
           .mobile-header-wrapper {
-            box-shadow: 4px 4px 0px var(--color-text-primary) !important;
+            box-shadow: none !important;
+            border-radius: 0 !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-top: none !important;
+            border-bottom: 1px solid color-mix(in srgb, var(--color-border) 30%, transparent) !important;
+            background-color: color-mix(in srgb, var(--color-surface) 15%, transparent) !important;
           }
           .mobile-header-inner {
             height: 52px !important;
@@ -271,17 +168,22 @@ export const Header = ({ onOpenAudit }) => {
           .mobile-controls-gap {
             gap: var(--space-2) !important;
           }
-          .mobile-hamburger-brutal {
-            width: 32px !important;
-            height: 32px !important;
+          
+          .btn-brutal-nav {
+            padding: 6px 12px !important;
+            font-size: 0.7rem !important;
+            border-width: 1.5px !important;
+            box-shadow: 2px 2px 0px var(--color-text-primary) !important;
           }
-          .mobile-hamburger-brutal svg {
-            width: 16px !important;
-            height: 16px !important;
+
+          .btn-brutal-nav:hover {
+            transform: translate(-1px, -1px) !important;
+            box-shadow: 3px 3px 0px var(--color-text-primary) !important;
           }
-          .mobile-slide-drawer-brutal {
-            padding: var(--space-3) !important;
-            gap: var(--space-2) !important;
+
+          .btn-brutal-nav:active {
+            transform: translate(1px, 1px) !important;
+            box-shadow: 0px 0px 0px var(--color-text-primary) !important;
           }
         }
         
@@ -292,22 +194,6 @@ export const Header = ({ onOpenAudit }) => {
           border-color: var(--color-text-primary);
           box-shadow: 2px 2px 0px var(--color-text-primary);
           transform: translate(-1px, -1px);
-        }
-        
-        .mobile-slide-drawer-brutal {
-          animation: slideDownBrutal 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-          transform-origin: top;
-        }
-        
-        @keyframes slideDownBrutal {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
         }
         
         @keyframes blink {
