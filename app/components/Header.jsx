@@ -102,13 +102,13 @@ export const Header = ({ onOpenAudit }) => {
           {/* Global Controls & Call to Action */}
           <div className="mobile-controls-gap" style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)' }}>
             {/* Book Audit Direct Trigger */}
-            <a 
-              href="mailto:flowifyy.agency@gmail.com?subject=Free Operations Audit Inquiry"
+            <button 
+              onClick={onOpenAudit}
               className="btn-brutal-nav"
-              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none' }}
+              style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', textDecoration: 'none', border: '2px solid var(--color-text-primary)' }}
             >
-              Free Operations Audit
-            </a>
+              Operations Audit
+            </button>
           </div>
         </div>
       </header>
